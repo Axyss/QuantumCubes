@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group 'me.axyss'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url "https://repo.dmulloy2.net/repository/public/" }
+}
+
+jar {
+    destinationDirectory.set(file("C:\\Users\\Alejandro Nieto\\Desktop\\test server\\plugins"))
+    //destinationDirectory.set(file("C:\\Users\\Alejandro Nieto\\Desktop\\spigot 1_19_4\\plugins"))
+}
+
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+    compileOnly 'org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT'
+    compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "5.0.0";
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,6 @@
+name: QuantumCubes
+version: 1.0.0
+author: Axyss
+main: me.axyss.quantumcubes.Main
+api-version: 1.13
+depend: [ProtocolLib]
