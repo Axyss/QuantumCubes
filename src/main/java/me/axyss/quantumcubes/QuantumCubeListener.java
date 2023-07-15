@@ -20,6 +20,8 @@ public class QuantumCubeListener implements Listener {
             SignGui gui = new SignGui();
             gui.readTextFrom(event.getPlayer());
 
+            HeadLibrary.main(event.getPlayer());
+
             Skull skull = (Skull) event.getBlockPlaced().getState();
             skull.setOwningPlayer(getServer().getOfflinePlayer(UUID.fromString("d2731bbf-0b6c-4816-ba99-add394b829d2")));
             skull.update();
