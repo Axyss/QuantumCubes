@@ -27,8 +27,7 @@ class FakeSign {
     }
 
     public static void onSignUpdateDo() {
-        if (textReader != null) {
-            // Removes previous listener making sure there's only one
+        if (textReader != null) { // Makes sure there's only one packet listener
             manager.removePacketListener(textReader);
         }
         textReader = new PacketAdapter(Main.getInstance(), ListenerPriority.NORMAL, PacketType.Play.Client.UPDATE_SIGN) {
@@ -59,7 +58,7 @@ class FakeSign {
         }
         this.currentLocation = location;
         previousBlock = fooledPlayer.getWorld().getBlockAt(getLocation()).getBlockData();
-        fooledPlayer.sendBlockChange(getLocation(), Material.BIRCH_SIGN.createBlockData());
+        fooledPlayer.sendBlockChange(getLocation(), Material.BIRCH_WALL_SIGN.createBlockData());
         fooledPlayer.sendSignChange(getLocation(), getText());
     }
 
