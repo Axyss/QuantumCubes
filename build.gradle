@@ -1,22 +1,8 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-        classpath "gradle.plugin.com.github.johnrengelman:shadow:7.1.2"
-        classpath 'org.jsoup:jsoup:1.16.1'
-    }
-}
-
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
-
-
-apply plugin: 'java'
-apply plugin: 'com.github.johnrengelman.shadow'
 
 group 'me.axyss'
 version '1.0-SNAPSHOT'
