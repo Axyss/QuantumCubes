@@ -1,6 +1,6 @@
 package me.axyss.quantumcubes;
 
-import me.axyss.quantumcubes.gui.MCHeadsDatabase;
+import me.axyss.quantumcubes.utils.MCHeadsDatabase;
 import org.bukkit.Material;
 import org.bukkit.block.Skull;
 import org.bukkit.event.EventHandler;
