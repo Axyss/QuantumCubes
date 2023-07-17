@@ -1,37 +1,37 @@
 package me.axyss.quantumcubes;
 
-import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Skull;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.profile.PlayerProfile;
-import org.bukkit.profile.PlayerTextures;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.UUID;
 
 public class QuantumCube {
+    private final Skull quantumCube;
 
+    private QuantumCube(Location skullLocation) {
+        quantumCube = (Skull) skullLocation.getBlock().getState();
+    }
 
-    public static ItemStack getQuantumHeadItem() {
+    public static QuantumCube fromLocation(Location skullLocation) {
+        return new QuantumCube(skullLocation);
+    }
+
+    public static ItemStack giveItem(Player player, int amount) {
         return new ItemStack(Material.ACACIA_BOAT);
     }
 
-    private static PlayerProfile getProfile(String url) {
-        PlayerProfile profile = Bukkit.createPlayerProfile(UUID.randomUUID()); // Get a new player profile
-        PlayerTextures textures = profile.getTextures();
-        URL urlObject;
-        try {
-            urlObject = new URL(url); // The URL to the skin, for example: https://textures.minecraft.net/texture/18813764b2abc94ec3c3bc67b9147c21be850cdf996679703157f4555997ea63a
-        } catch (MalformedURLException exception) {
-            throw new RuntimeException("Invalid URL", exception);
-        }
-        textures.setSkin(urlObject); // Set the skin of the player profile to the URL
-        profile.setTextures(textures); // Set the textures back to the profile
-        return profile;
-    }
-
-    public void collapse(String base64Texture) {
-
+    public void applyTexture(URL textureLink) {
+        PlayerProfile dummyPlayer = Main.getInstance().getServer().createPlayerProfile(UUID.randomUUID(), "QuantumPlayer");
+        dummyPlayer.getTextures().setSkin(textureLink);
+        quantumCube.setOwnerProfile(dummyPlayer);
+        quantumCube.update();
     }
 }
