@@ -5,7 +5,6 @@ import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
-import me.axyss.quantumcubes.Main;
 import me.axyss.quantumcubes.data.QuantumCube;
 import me.axyss.quantumcubes.data.QuantumCubeArchive;
 import me.axyss.quantumcubes.utils.MCHeadsDatabase;

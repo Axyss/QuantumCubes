@@ -1,6 +1,5 @@
 package me.axyss.quantumcubes.gui.sign;
 
-import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolManager;
 import me.axyss.quantumcubes.gui.IGui;
 import org.bukkit.Location;
