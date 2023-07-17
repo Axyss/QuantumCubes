@@ -1,4 +1,4 @@
-package me.axyss.quantumcubes.gui;
+package me.axyss.quantumcubes.utils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
