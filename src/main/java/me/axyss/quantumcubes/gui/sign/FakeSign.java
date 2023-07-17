@@ -15,14 +15,15 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 
 class FakeSign {
-    private static final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
+    private final ProtocolManager manager;
     private final Player fooledPlayer;
     private BlockData previousBlock;
     private Location currentLocation;
     private String[] text;
 
-    public FakeSign(Player fooledPlayer) {
+    public FakeSign(Player fooledPlayer, ProtocolManager manager) {
         this.fooledPlayer = fooledPlayer;
+        this.manager = manager;
     }
 
     public String[] getText() {
@@ -54,7 +55,7 @@ class FakeSign {
         fooledPlayer.sendBlockChange(currentLocation, previousBlock);
         previousBlock = null;
         currentLocation = null;
-        // todo esto puede dar problemillas
+        // todo this part might be problematic in a scenario where a second player is present
     }
 
     public void forcePlayerToOpen() {

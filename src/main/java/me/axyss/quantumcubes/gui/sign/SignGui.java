@@ -1,24 +1,26 @@
 package me.axyss.quantumcubes.gui.sign;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolManager;
 import me.axyss.quantumcubes.gui.IGui;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class SignGui implements IGui {
+    ProtocolManager manager;
+
+    public SignGui(ProtocolManager manager) {
+        this.manager = manager;
+    }
 
     @Override
     public void openFor(Player player) {
-        FakeSign testSign = new FakeSign(player);
+        FakeSign testSign = new FakeSign(player, manager);
         testSign.setText(new String[] {"", "Introduce a", "Minecraft-Heads", "Identifier"});
         testSign.materialize(getBlindSpotOf(player));
         testSign.forcePlayerToOpen();
-        try {
-            Thread.sleep(2000);
-        } catch (java.lang.InterruptedException e) {
-            System.out.println("a");
-        }
-        testSign.dematerialize();
+        // todo Implement dematerialization feature
 
     }
 

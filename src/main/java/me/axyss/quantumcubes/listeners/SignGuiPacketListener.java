@@ -28,7 +28,7 @@ public class SignGuiPacketListener extends PacketAdapter {
             event.setCancelled(true);
         } else {
             QuantumCube quantumCube = QuantumCubeArchive.extractLastPlacedBy(event.getPlayer().getUniqueId());
-            Main.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
+            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 try {
                     quantumCube.applyTexture(MCHeadsDatabase.getMinecraftTexturesLink(Integer.parseInt(signPlayerInput)));
                 } catch (IOException | URISyntaxException e) {
