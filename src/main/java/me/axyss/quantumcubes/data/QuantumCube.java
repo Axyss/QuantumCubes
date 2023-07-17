@@ -1,5 +1,6 @@
-package me.axyss.quantumcubes;
+package me.axyss.quantumcubes.data;
 
+import me.axyss.quantumcubes.Main;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Skull;
@@ -7,9 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.profile.PlayerProfile;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.UUID;
 
@@ -29,7 +27,7 @@ public class QuantumCube {
     }
 
     public void applyTexture(URL textureLink) {
-        PlayerProfile dummyPlayer = Main.getInstance().getServer().createPlayerProfile(UUID.randomUUID(), "QuantumPlayer");
+        PlayerProfile dummyPlayer = Main.getInstance().getServer().createPlayerProfile(UUID.randomUUID(), "");
         dummyPlayer.getTextures().setSkin(textureLink);
         quantumCube.setOwnerProfile(dummyPlayer);
         quantumCube.update();
