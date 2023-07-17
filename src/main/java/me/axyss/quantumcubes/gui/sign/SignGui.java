@@ -8,11 +8,10 @@ import org.bukkit.util.Vector;
 public class SignGui implements IGui {
 
     @Override
-    public void readTextFrom(Player player) {
+    public void openFor(Player player) {
         FakeSign testSign = new FakeSign(player);
-        FakeSign.onSignUpdateDo();
         testSign.setText(new String[] {"", "Introduce a", "Minecraft-Heads", "Identifier"});
-        testSign.materialize(getPlayerBlindSpot(player));
+        testSign.materialize(getBlindSpotOf(player));
         testSign.forcePlayerToOpen();
         try {
             Thread.sleep(2000);
@@ -23,7 +22,7 @@ public class SignGui implements IGui {
 
     }
 
-    private static Location getPlayerBlindSpot(Player player) {
+    private static Location getBlindSpotOf(Player player) {
         Vector playerPosition = player.getLocation().toVector();
         Vector playerLookingAt = player.getTargetBlock(null, 5).getLocation().toVector();
         double lengthScalingFactor;
