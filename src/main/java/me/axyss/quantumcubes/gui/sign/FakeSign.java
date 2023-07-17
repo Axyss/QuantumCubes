@@ -16,7 +16,6 @@ import org.bukkit.entity.Player;
 
 class FakeSign {
     private static final ProtocolManager manager = ProtocolLibrary.getProtocolManager();
-    private static PacketAdapter textReader;
     private final Player fooledPlayer;
     private BlockData previousBlock;
     private Location currentLocation;
@@ -24,20 +23,6 @@ class FakeSign {
 
     public FakeSign(Player fooledPlayer) {
         this.fooledPlayer = fooledPlayer;
-    }
-
-    public static void onSignUpdateDo() {
-        if (textReader != null) { // Makes sure there's only one packet listener
-            manager.removePacketListener(textReader);
-        }
-        textReader = new PacketAdapter(Main.getInstance(), ListenerPriority.NORMAL, PacketType.Play.Client.UPDATE_SIGN) {
-            @Override
-            public void onPacketReceiving(PacketEvent event) {
-                PacketContainer packet = event.getPacket();
-            }
-        };
-        // todo finish
-        manager.addPacketListener(textReader);
     }
 
     public String[] getText() {
