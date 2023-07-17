@@ -5,7 +5,14 @@ import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
+import me.axyss.quantumcubes.Main;
+import me.axyss.quantumcubes.data.QuantumCube;
+import me.axyss.quantumcubes.data.QuantumCubeArchive;
+import me.axyss.quantumcubes.utils.MCHeadsDatabase;
 import org.bukkit.plugin.Plugin;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class SignGuiPacketListener extends PacketAdapter {
     public SignGuiPacketListener(Plugin plugin, ListenerPriority priority, PacketType packet) {
@@ -20,7 +27,15 @@ public class SignGuiPacketListener extends PacketAdapter {
         if (signPlayerInput == null || signPlayerInput.isBlank()) {
             event.setCancelled(true);
         } else {
-            ; // Here goes some sign logic
+            QuantumCube quantumCube = QuantumCubeArchive.extractLastPlacedBy(event.getPlayer().getUniqueId());
+            Main.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
+                try {
+                    quantumCube.applyTexture(MCHeadsDatabase.getMinecraftTexturesLink(Integer.parseInt(signPlayerInput)));
+                } catch (IOException | URISyntaxException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
         }
     }
 }
