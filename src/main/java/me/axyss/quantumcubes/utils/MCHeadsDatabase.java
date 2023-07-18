@@ -8,6 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MCHeadsDatabase {
+    private static final Pattern texturesLink = Pattern.compile("http(s)?://textures.minecraft.net/texture/.*?(?=\")");
+
     public static URL getMinecraftTexturesLink(int headId) throws IOException, URISyntaxException {
         URL mcHeadLink = new URI("https://minecraft-heads.com/custom-heads/%s".formatted(String.valueOf(headId))).toURL();
         HttpURLConnection connection = (HttpURLConnection) mcHeadLink.openConnection();
@@ -17,8 +19,7 @@ public class MCHeadsDatabase {
     }
 
     private static URL parseMinecraftTexturesLink(String htmlDocument) throws URISyntaxException, MalformedURLException {
-        Pattern pattern = Pattern.compile("http(s)?://textures.minecraft.net/texture/.*?(?=\")");
-        Matcher matcher = pattern.matcher(htmlDocument);
+        Matcher matcher = texturesLink.matcher(htmlDocument);
         if (matcher.find()) {
             return new URI(matcher.group()).toURL();
         }
