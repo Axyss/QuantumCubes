@@ -4,3 +4,10 @@ author: Axyss
 main: me.axyss.quantumcubes.Main
 api-version: 1.13
 depend: [ProtocolLib]
+
+commands:
+  QuantumCubes:
+    description: Gives a player a certain amount of Quantum Cubes
+    aliases: qc
+    usage: "§4Usage: /quantumcubes give <player> [amount]"
+    permission: quantumcubes.give

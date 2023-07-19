@@ -4,6 +4,7 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.ListenerPriority;
+import me.axyss.quantumcubes.commands.GiveCommand;
 import me.axyss.quantumcubes.data.QuantumCubeArchive;
 import me.axyss.quantumcubes.listeners.QuantumCubeListener;
 import me.axyss.quantumcubes.listeners.SignGuiPacketListener;
@@ -28,5 +29,7 @@ public class Main extends JavaPlugin {
         QuantumCubeArchive archive = new QuantumCubeArchive();
         protocolManager.addPacketListener(new SignGuiPacketListener(this, ListenerPriority.NORMAL, PacketType.Play.Client.UPDATE_SIGN));
         getServer().getPluginManager().registerEvents(new QuantumCubeListener(protocolManager), this);
+        this.getCommand("quantumcubes").setExecutor(new GiveCommand());
+        this.getCommand("quantumcubes").setTabCompleter(new GiveCommand());
     }
 }
