@@ -8,6 +8,7 @@ import com.comphenix.protocol.events.PacketEvent;
 import me.axyss.quantumcubes.data.QuantumCube;
 import me.axyss.quantumcubes.data.QuantumCubeArchive;
 import me.axyss.quantumcubes.utils.MCHeadsDatabase;
+import org.bukkit.Sound;
 import org.bukkit.plugin.Plugin;
 
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class SignGuiPacketListener extends PacketAdapter {
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 try {
                     quantumCube.applyTexture(MCHeadsDatabase.getMinecraftTexturesLink(Integer.parseInt(signPlayerInput)));
+                    event.getPlayer().playSound(event.getPlayer(), Sound.ENTITY_ENDERMAN_TELEPORT, 0.5f, 1.0f);
                 } catch (IOException | URISyntaxException e) {
                     throw new RuntimeException(e);
                 }
