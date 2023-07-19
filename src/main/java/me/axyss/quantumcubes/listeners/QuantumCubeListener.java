@@ -3,6 +3,7 @@ package me.axyss.quantumcubes.listeners;
 import com.comphenix.protocol.ProtocolManager;
 import me.axyss.quantumcubes.data.QuantumCube;
 import me.axyss.quantumcubes.data.QuantumCubeArchive;
+import me.axyss.quantumcubes.gui.IGui;
 import me.axyss.quantumcubes.gui.sign.SignGui;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -19,8 +20,8 @@ public class QuantumCubeListener implements Listener {
 
     @EventHandler
     public void onQuantumCubePlaced(BlockPlaceEvent event) {
-        if (event.getBlockPlaced().getType() == Material.PLAYER_HEAD) {
-            SignGui gui = new SignGui(manager);
+        if (!event.isCancelled() && event.getBlockPlaced().getType() == Material.PLAYER_HEAD) { // Placeholder
+            IGui gui = new SignGui(manager);
             gui.openFor(event.getPlayer());
             QuantumCubeArchive.insert(event.getPlayer().getUniqueId(), QuantumCube.fromLocation(event.getBlockPlaced().getLocation()));
         }
