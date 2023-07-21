@@ -20,10 +20,17 @@ public class GiveCommand implements CommandExecutor, TabCompleter {
         Player giveToPlayer;
         int giveAmount = 1;
 
-        if ((args.length == 2 || args.length == 3) && "give".equals(args[0]) && (giveToPlayer = Bukkit.getPlayer(args[1])) != null) {
-            if (args.length == 3 && Integer.getInteger(args[2]) != null) {
-                giveAmount = Integer.getInteger(args[2]);
+        // Manages [amount]
+        if (args.length == 3) {
+            try {
+                giveAmount = Integer.parseInt(args[2]);
+            } catch (NumberFormatException err) {
+                return false;
             }
+        }
+
+        // Manages /gc give <player>
+        if ((args.length == 2 || args.length == 3) && "give".equals(args[0]) && (giveToPlayer = Bukkit.getPlayer(args[1])) != null) {
             giveToPlayer.getInventory().addItem(new ItemStack(Material.PLAYER_HEAD, giveAmount));
             giveToPlayer.playSound(giveToPlayer, Sound.ENTITY_ITEM_PICKUP, 0.5f, 1.0f);
             return true;
