@@ -6,13 +6,11 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.BlockPosition;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 
 class FakeSign {
     private final ProtocolManager manager;
     private final Player fooledPlayer;
-    private BlockData previousBlock;
     private Location currentLocation;
     private String[] text;
 
@@ -36,21 +34,20 @@ class FakeSign {
     public void materialize(Location location) {
         if (getLocation() != null) {
             throw new IllegalStateException("FakeSign has already been materialized.");
+        } else {
+            this.currentLocation = location;
+            fooledPlayer.sendBlockChange(getLocation(), Material.BIRCH_WALL_SIGN.createBlockData());
+            fooledPlayer.sendSignChange(getLocation(), getText());
         }
-        this.currentLocation = location;
-        previousBlock = fooledPlayer.getWorld().getBlockAt(getLocation()).getBlockData();
-        fooledPlayer.sendBlockChange(getLocation(), Material.BIRCH_WALL_SIGN.createBlockData());
-        fooledPlayer.sendSignChange(getLocation(), getText());
     }
 
     public void dematerialize() {
         if (getLocation() == null) {
             throw new IllegalStateException("FakeSign has already been dematerialized.");
+        } else {
+            fooledPlayer.sendBlockChange(getLocation(), currentLocation.getWorld().getBlockData(getLocation()));
+            currentLocation = null;
         }
-        fooledPlayer.sendBlockChange(currentLocation, previousBlock);
-        previousBlock = null;
-        currentLocation = null;
-        // todo this part might be problematic in a scenario where a second player is present
     }
 
     public void forcePlayerToOpen() {
