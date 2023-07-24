@@ -7,20 +7,26 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class SignGui implements IGui {
+    FakeSign sign;
+    Player player;
     ProtocolManager manager;
 
-    public SignGui(ProtocolManager manager) {
+    public SignGui(ProtocolManager manager, Player player) {
         this.manager = manager;
+        this.player = player;
+        sign = new FakeSign(player, this.manager);
     }
 
     @Override
-    public void openFor(Player player) {
-        FakeSign testSign = new FakeSign(player, manager);
-        testSign.setText(new String[] {"", "Introduce a", "Minecraft-Heads", "Identifier"});
-        testSign.materialize(getBlindSpotOf(player));
-        testSign.forcePlayerToOpen();
-        // todo Implement dematerialization feature
+    public void open() {
+        sign.setText(new String[] {"", "Introduce a", "Minecraft-Heads", "Identifier"});
+        sign.materialize(getBlindSpotOf(player));
+        sign.forcePlayerToOpen();
+    }
 
+    @Override
+    public void close() {
+        sign.dematerialize();
     }
 
     private static Location getBlindSpotOf(Player player) {
