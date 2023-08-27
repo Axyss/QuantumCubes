@@ -55,7 +55,7 @@ public class SignGui implements IGui {
                     QuantumCube quantumCube = QuantumCubeArchive.extractLastPlacedBy(event.getPlayer().getUniqueId());
                     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                         try {
-                            quantumCube.applyTexture(MCHeadsDatabase.getMinecraftTexturesLink(Integer.parseInt(signPlayerInput)));
+                            quantumCube.applyTexture(signPlayerInput, MCHeadsDatabase.getMinecraftTexturesLink(Integer.parseInt(signPlayerInput)));
                             event.getPlayer().playSound(event.getPlayer(), Sound.ENTITY_ENDERMAN_TELEPORT, 0.5f, 1.0f);
                         } catch (IOException | URISyntaxException e) {
                             throw new RuntimeException(e);

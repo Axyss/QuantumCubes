@@ -28,8 +28,8 @@ public class QuantumCube {
         return new QuantumCube(skullLocation);
     }
 
-    public void applyTexture(URL textureLink) {
-        PlayerProfile dummyPlayer = getDummyProfile("Used Quantum Cube");  // Marks QC as used
+    public void applyTexture(String textureName, URL textureLink) {
+        PlayerProfile dummyPlayer = getDummyProfile(textureName);
         dummyPlayer.getTextures().setSkin(textureLink);
         quantumCube.setOwnerProfile(dummyPlayer);
         quantumCube.update();
