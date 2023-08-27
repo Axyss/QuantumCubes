@@ -14,8 +14,7 @@ repositories {
 }
 
 jar {
-    destinationDirectory.set(file("C:\\Users\\Alejandro Nieto\\Desktop\\test server\\plugins"))
-    //destinationDirectory.set(file("C:\\Users\\Alejandro Nieto\\Desktop\\spigot 1_19_4\\plugins"))
+    destinationDirectory.set(file("C:\\Users\\alexn\\Desktop\\Test Server\\plugins"))
 }
 
 
