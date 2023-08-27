@@ -4,10 +4,11 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.ListenerPriority;
-import me.axyss.quantumcubes.commands.GiveCommand;
+import me.axyss.quantumcubes.commands.give.GiveCommand;
+import me.axyss.quantumcubes.commands.give.GiveTabCompleter;
 import me.axyss.quantumcubes.data.QuantumCubeArchive;
+import me.axyss.quantumcubes.gui.sign.SignGui;
 import me.axyss.quantumcubes.listeners.QuantumCubeListener;
-import me.axyss.quantumcubes.listeners.SignGuiPacketListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -27,9 +28,9 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         QuantumCubeArchive archive = new QuantumCubeArchive();
-        protocolManager.addPacketListener(new SignGuiPacketListener(this, ListenerPriority.NORMAL, PacketType.Play.Client.UPDATE_SIGN));
+        protocolManager.addPacketListener(SignGui.getPacketAdapter());
         getServer().getPluginManager().registerEvents(new QuantumCubeListener(protocolManager), this);
         this.getCommand("quantumcubes").setExecutor(new GiveCommand());
-        this.getCommand("quantumcubes").setTabCompleter(new GiveCommand());
+        this.getCommand("quantumcubes").setTabCompleter(new GiveTabCompleter());
     }
 }
