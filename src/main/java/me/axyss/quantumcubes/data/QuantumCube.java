@@ -29,7 +29,7 @@ public class QuantumCube {
     }
 
     public void applyTexture(URL textureLink) {
-        PlayerProfile dummyPlayer = getDummyProfile("Used Quantum Cube");
+        PlayerProfile dummyPlayer = getDummyProfile("Used Quantum Cube");  // Marks QC as used
         dummyPlayer.getTextures().setSkin(textureLink);
         quantumCube.setOwnerProfile(dummyPlayer);
         quantumCube.update();
@@ -46,7 +46,7 @@ public class QuantumCube {
 
         newQuantumCubeItem.setAmount(amount);
         newQuantumCubeItemMeta.setDisplayName(ChatColor.AQUA + "Quantum Cube");
-        newQuantumCubeItemMeta.setLore(List.of("A wierd cube. Some say it", "responds to one's deepest", "heart's desires."));
+        newQuantumCubeItemMeta.setLore(List.of("A weird cube. Some say it", "responds to one's deepest", "heart's desires."));
 
         try {
             dummyPlayer.getTextures().setSkin(new URI("https://textures.minecraft.net/texture/7999050775dd5a524735284cbbac45aa392c0ac8fa980bd24c331552b654b824").toURL());
