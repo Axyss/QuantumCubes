@@ -28,10 +28,21 @@ public class QuantumCube {
         return new QuantumCube(skullLocation);
     }
 
-    public static ItemStack getNew(int amount) {
+    public void applyTexture(URL textureLink) {
+        PlayerProfile dummyPlayer = getDummyProfile("Used Quantum Cube");
+        dummyPlayer.getTextures().setSkin(textureLink);
+        quantumCube.setOwnerProfile(dummyPlayer);
+        quantumCube.update();
+    }
+
+    public boolean isUsed() {
+        return !"Unused Quantum Cube".equals(quantumCube.getOwnerProfile().getName());
+    }
+
+    public static ItemStack getItem(int amount) {
         ItemStack newQuantumCubeItem = new ItemStack(Material.PLAYER_HEAD);
         ItemMeta newQuantumCubeItemMeta = newQuantumCubeItem.getItemMeta();
-        PlayerProfile dummyPlayer = getDummyProfile();
+        PlayerProfile dummyPlayer = getDummyProfile("Unused Quantum Cube");
 
         newQuantumCubeItem.setAmount(amount);
         newQuantumCubeItemMeta.setDisplayName(ChatColor.AQUA + "Quantum Cube");
@@ -48,14 +59,7 @@ public class QuantumCube {
         return newQuantumCubeItem;
     }
 
-    private static PlayerProfile getDummyProfile() {
-        return Main.getInstance().getServer().createPlayerProfile(UUID.randomUUID(), "");
-    }
-
-    public void applyTexture(URL textureLink) {
-        PlayerProfile dummyPlayer = getDummyProfile();
-        dummyPlayer.getTextures().setSkin(textureLink);
-        quantumCube.setOwnerProfile(dummyPlayer);
-        quantumCube.update();
+    private static PlayerProfile getDummyProfile(String username) {
+        return Main.getInstance().getServer().createPlayerProfile(UUID.randomUUID(), username);
     }
 }

@@ -20,7 +20,10 @@ public class QuantumCubeListener implements Listener {
 
     @EventHandler
     public void onQuantumCubePlaced(BlockPlaceEvent event) {
-        if (!event.isCancelled() && event.getBlockPlaced().getType() == Material.PLAYER_HEAD || event.getBlockPlaced().getType() == Material.PLAYER_WALL_HEAD) { // Placeholder
+        if (event.isCancelled() || event.getBlockPlaced().getType() != Material.PLAYER_HEAD) {
+            return;
+        }
+        if (!QuantumCube.fromLocation(event.getBlockPlaced().getLocation()).isUsed()) {
             IGui gui = new SignGui(manager, event.getPlayer());
             gui.open();
             QuantumCubeArchive.insert(event.getPlayer().getUniqueId(), QuantumCube.fromLocation(event.getBlockPlaced().getLocation()));

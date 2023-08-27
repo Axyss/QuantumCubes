@@ -26,8 +26,8 @@ public class GiveCommand implements CommandExecutor {
 
         // Manages /gc give <player>
         if ((args.length == 2 || args.length == 3) && "give".equals(args[0]) && (giveToPlayer = Bukkit.getPlayer(args[1])) != null) {
-            giveToPlayer.getInventory().addItem(QuantumCube.getNew(giveAmount));
-            giveToPlayer.playSound(giveToPlayer, Sound.ENTITY_ITEM_PICKUP, 0.5f, 1.0f);
+            giveToPlayer.getInventory().addItem(QuantumCube.getItem(giveAmount));
+            giveToPlayer.playSound(giveToPlayer, Sound.ENTITY_ITEM_PICKUP, 0.6f, 1.0f);
             return true;
         }
         return false;
