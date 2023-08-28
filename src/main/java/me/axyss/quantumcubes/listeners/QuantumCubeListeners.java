@@ -22,7 +22,7 @@ import java.util.UUID;
 
 public class QuantumCubeListeners implements Listener {
     private final ProtocolManager manager;
-    private final DestructiveReadMap eventSharedStorage = new DestructiveReadMap();
+    private final DestructiveReadMap<UUID, List<Object>> eventSharedStorage = new DestructiveReadMap<>();
 
     public QuantumCubeListeners(ProtocolManager manager) {
         this.manager = manager;
@@ -45,7 +45,7 @@ public class QuantumCubeListeners implements Listener {
     public void onHeadIdSubmitted(HeadIdSubmittedEvent event) {
         Player interactingPlayer = event.getPlayer();
         String headId = String.valueOf(event.getHeadId());
-        List<Object> quantumCubeGuiPair = eventSharedStorage.extractLastPlacedBy(interactingPlayer.getUniqueId());
+        List<Object> quantumCubeGuiPair = eventSharedStorage.extract(interactingPlayer.getUniqueId());
 
         if (headId.isBlank()) {
             event.setCancelled(true);
@@ -64,17 +64,16 @@ public class QuantumCubeListeners implements Listener {
     }
 }
 
-// todo rename variables
-class DestructiveReadMap {
-    private final HashMap<UUID, List<Object>> quantumCubeGuiPairs = new HashMap<>();
+class DestructiveReadMap<K, V> {
+    private final HashMap<K, V> map = new HashMap<>();
 
-    public void insert(UUID playerWhoInteracted, List<Object> guiQuantumCubePair) {
-        quantumCubeGuiPairs.put(playerWhoInteracted, guiQuantumCubePair);
+    public void insert(K key, V value) {
+        map.put(key, value);
     }
 
-    public List<Object> extractLastPlacedBy(UUID playerWhoInteracted) {
-        List<Object> quantumCubeGuiPair = quantumCubeGuiPairs.get(playerWhoInteracted);
-        quantumCubeGuiPairs.remove(playerWhoInteracted);
-        return quantumCubeGuiPair;
+    public V extract(K key) {
+        V value = map.get(key);
+        map.remove(key);
+        return value;
     }
 }
