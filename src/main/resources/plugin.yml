@@ -11,3 +11,9 @@ commands:
     aliases: qc
     usage: "§4Usage: /quantumcubes give <player> [amount]"
     permission: quantumcubes.give
+
+permissions:
+  quantumcubes.give:
+    default: op
+  quantumcubes.use:
+    default: op
