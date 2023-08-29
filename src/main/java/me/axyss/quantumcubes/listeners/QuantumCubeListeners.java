@@ -7,6 +7,7 @@ import me.axyss.quantumcubes.gui.IGui;
 import me.axyss.quantumcubes.gui.sign.SignGui;
 import me.axyss.quantumcubes.utils.MCHeadsDatabase;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -58,6 +59,10 @@ public class QuantumCubeListeners implements Listener {
             try {
                 quantumCube.applyTexture(headId, MCHeadsDatabase.getMinecraftTexturesLink(Integer.parseInt(headId)));
                 interactingPlayer.playSound(interactingPlayer, Sound.ENTITY_ENDERMAN_TELEPORT, 0.5f, 1.0f);
+                interactingPlayer.spawnParticle(Particle.DRAGON_BREATH,
+                        quantumCube.getLocation().add(0.5, 0.5, 0.5),
+                        60, 0.0, 0.0, 0.0, 0.2
+                );
             } catch (IOException | URISyntaxException e) {
                 throw new RuntimeException(e);
             } catch (NumberFormatException ignored) {}
