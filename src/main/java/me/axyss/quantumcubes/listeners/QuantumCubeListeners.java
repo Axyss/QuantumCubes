@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -23,6 +24,7 @@ import java.util.UUID;
 public class QuantumCubeListeners implements Listener {
     private final ProtocolManager manager;
     private final DestructiveReadMap<UUID, List<Object>> eventSharedStorage = new DestructiveReadMap<>();
+    private final List<Material> allowedQuantumCubeMaterials = List.of(Material.PLAYER_HEAD, Material.PLAYER_WALL_HEAD);
 
     public QuantumCubeListeners(ProtocolManager manager) {
         this.manager = manager;
@@ -30,11 +32,11 @@ public class QuantumCubeListeners implements Listener {
 
     @EventHandler
     public void onPlacedQuantumCube(BlockPlaceEvent event) {
-        if (event.isCancelled() || event.getBlockPlaced().getType() != Material.PLAYER_HEAD) {  // If it's not a QC
+        if (event.isCancelled() || !allowedQuantumCubeMaterials.contains(event.getBlockPlaced().getType())) {
             return;
         }
         QuantumCube placedQuantumCube = QuantumCube.fromLocation(event.getBlockPlaced().getLocation());
-        if (!placedQuantumCube.isUsed()) {
+        if (!placedQuantumCube.isUsed() && event.getPlayer().hasPermission("quantumcubes.use")) {
             IGui playerGui = new SignGui(manager, event.getPlayer());
             playerGui.open();
             eventSharedStorage.insert(event.getPlayer().getUniqueId(), List.of(placedQuantumCube, playerGui));
@@ -47,7 +49,7 @@ public class QuantumCubeListeners implements Listener {
         String headId = String.valueOf(event.getHeadId());
         List<Object> quantumCubeGuiPair = eventSharedStorage.extract(interactingPlayer.getUniqueId());
 
-        if (headId.isBlank()) {
+        if (headId.isBlank() || quantumCubeGuiPair == null) {
             event.setCancelled(true);
             return;
         }
@@ -61,6 +63,12 @@ public class QuantumCubeListeners implements Listener {
             }
         });
         ((IGui) quantumCubeGuiPair.get(1)).close();
+    }
+
+    @EventHandler
+    // Prevents memory leaks in case the player quits without submitting a Head ID
+    private void onPlayerQuit(PlayerQuitEvent event) {
+        eventSharedStorage.extract(event.getPlayer().getUniqueId());
     }
 }
 
