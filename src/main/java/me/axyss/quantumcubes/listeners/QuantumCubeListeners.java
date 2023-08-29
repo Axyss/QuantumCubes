@@ -44,7 +44,7 @@ public class QuantumCubeListeners implements Listener {
     }
 
     @EventHandler
-    public void onHeadIdSubmitted(HeadIdSubmittedEvent event) {
+    public void onHeadIdSubmitted(InputSubmittedEvent event) {
         Player interactingPlayer = event.getPlayer();
         String headId = String.valueOf(event.getHeadId());
         List<Object> quantumCubeGuiPair = eventSharedStorage.extract(interactingPlayer.getUniqueId());

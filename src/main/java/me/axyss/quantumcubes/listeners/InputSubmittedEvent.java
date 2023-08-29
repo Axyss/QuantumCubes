@@ -7,9 +7,9 @@ import org.bukkit.event.HandlerList;
 
 import javax.annotation.Nonnull;
 
-public class HeadIdSubmittedEvent extends Event implements Cancellable {
+public class InputSubmittedEvent extends Event implements Cancellable {
     private static final HandlerList HANDLERS = new HandlerList();
-    private final int headId;
+    private final String inputText;
     private final Player player;
     private boolean isCancelled = false;
 
@@ -17,8 +17,8 @@ public class HeadIdSubmittedEvent extends Event implements Cancellable {
         return HANDLERS;
     }
 
-    public HeadIdSubmittedEvent(int headId, Player player) {
-        this.headId = headId;
+    public InputSubmittedEvent(String inputText, Player player) {
+        this.inputText = inputText;
         this.player = player;
     }
 
@@ -28,8 +28,8 @@ public class HeadIdSubmittedEvent extends Event implements Cancellable {
         return HANDLERS;
     }
 
-    public int getHeadId() {
-        return this.headId;
+    public String getHeadId() {
+        return this.inputText;
     }
 
     public Player getPlayer() {
