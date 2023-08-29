@@ -35,6 +35,10 @@ public class QuantumCube {
         quantumCube.update();
     }
 
+    public Location getLocation() {
+        return quantumCube.getLocation();
+    }
+
     public boolean isUsed() {
         return !"Unused Quantum Cube".equals(quantumCube.getOwnerProfile().getName());
     }
