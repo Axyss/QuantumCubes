@@ -49,7 +49,7 @@ public class QuantumCubeListeners implements Listener {
         String headId = event.getInputText();
         List<Object> quantumCubeGuiPair = eventSharedStorage.extract(interactingPlayer.getUniqueId());
 
-        if (headId.isBlank() || quantumCubeGuiPair == null) {
+        if (quantumCubeGuiPair == null) {
             event.setCancelled(true);
             return;
         }
