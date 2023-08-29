@@ -44,9 +44,9 @@ public class QuantumCubeListeners implements Listener {
     }
 
     @EventHandler
-    public void onHeadIdSubmitted(InputSubmittedEvent event) {
+    public void onInputSubmitted(InputSubmittedEvent event) {
         Player interactingPlayer = event.getPlayer();
-        String headId = String.valueOf(event.getHeadId());
+        String headId = event.getInputText();
         List<Object> quantumCubeGuiPair = eventSharedStorage.extract(interactingPlayer.getUniqueId());
 
         if (headId.isBlank() || quantumCubeGuiPair == null) {
@@ -60,7 +60,7 @@ public class QuantumCubeListeners implements Listener {
                 interactingPlayer.playSound(interactingPlayer, Sound.ENTITY_ENDERMAN_TELEPORT, 0.5f, 1.0f);
             } catch (IOException | URISyntaxException e) {
                 throw new RuntimeException(e);
-            }
+            } catch (NumberFormatException ignored) {}
         });
         ((IGui) quantumCubeGuiPair.get(1)).close();
     }

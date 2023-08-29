@@ -28,7 +28,7 @@ public class InputSubmittedEvent extends Event implements Cancellable {
         return HANDLERS;
     }
 
-    public String getHeadId() {
+    public String getInputText() {
         return this.inputText;
     }
 
