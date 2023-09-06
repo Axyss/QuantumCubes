@@ -2,8 +2,10 @@
 ## QUANTUM CUBES CONFIG ##
 ##########################
 
-qc-default-name: "Quantum Cube"
-qc-default-lore: "A strange cube"
+qc-default-name: "&aQuantum Cube"
+qc-default-lore:
+  - "&6A strange cube,"
+  - "&6it appears to be unstable."
 qc-default-texture: "https://textures.minecraft.net/texture/7999050775dd5a524735284cbbac45aa392c0ac8fa980bd24c331552b654b824"
 
 config-version: 1  # Internal value, do not modify!

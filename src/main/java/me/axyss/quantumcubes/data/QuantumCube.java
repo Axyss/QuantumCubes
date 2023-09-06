@@ -1,6 +1,7 @@
 package me.axyss.quantumcubes.data;
 
 import me.axyss.quantumcubes.Main;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Skull;
@@ -14,12 +15,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class QuantumCube {
     private final Skull quantumCube;
     private static String quantumCubeItemName;
-    private static String quantumCubeItemLore;
+    private static List<String> quantumCubeItemLore;
     private static String quantumCubeItemTexture;
 
     private QuantumCube(Location skullLocation) {
@@ -45,9 +48,12 @@ public class QuantumCube {
         return !"Unused Quantum Cube".equals(quantumCube.getOwnerProfile().getName());
     }
 
-    public static void setItemValues(String quantumCubeItemName, String quantumCubeItemLore, String quantumCubeItemTexture) {
-        QuantumCube.quantumCubeItemName = quantumCubeItemName;
-        QuantumCube.quantumCubeItemLore = quantumCubeItemLore;
+    public static void setItemValues(String quantumCubeItemName, List<String> quantumCubeItemLore, String quantumCubeItemTexture) {
+        QuantumCube.quantumCubeItemName = ChatColor.translateAlternateColorCodes('&', quantumCubeItemName);
+        QuantumCube.quantumCubeItemLore =
+                quantumCubeItemLore.stream()
+                .map(loreLine -> ChatColor.translateAlternateColorCodes('&', loreLine))
+                .collect(Collectors.toList());
         QuantumCube.quantumCubeItemTexture = quantumCubeItemTexture;
     }
 
@@ -59,7 +65,7 @@ public class QuantumCube {
         newQuantumCubeItem.setAmount(amount);
         Main.getInstance().getServer().getConsoleSender().sendMessage(quantumCubeItemTexture);
         newQuantumCubeItemMeta.setDisplayName(quantumCubeItemName);
-        newQuantumCubeItemMeta.setLore(Arrays.stream(quantumCubeItemLore.split("\n")).toList());
+        newQuantumCubeItemMeta.setLore(quantumCubeItemLore);
 
         try {
             dummyPlayer.getTextures().setSkin(new URI(quantumCubeItemTexture).toURL());

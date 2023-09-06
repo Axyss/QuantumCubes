@@ -28,7 +28,7 @@ public class Main extends JavaPlugin {
         this.saveDefaultConfig();
         QuantumCube.setItemValues(
                 this.getConfig().getString("qc-default-name"),
-                this.getConfig().getString("qc-default-lore"),
+                this.getConfig().getStringList("qc-default-lore"),
                 this.getConfig().getString("qc-default-texture")
         );
         protocolManager.addPacketListener(SignGui.getPacketAdapter());
