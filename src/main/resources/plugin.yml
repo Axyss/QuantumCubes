@@ -16,4 +16,4 @@ permissions:
   quantumcubes.give:
     default: op
   quantumcubes.use:
-    default: op
+    default: true
