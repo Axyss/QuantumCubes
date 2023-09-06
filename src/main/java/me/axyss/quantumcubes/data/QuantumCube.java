@@ -1,7 +1,6 @@
 package me.axyss.quantumcubes.data;
 
 import me.axyss.quantumcubes.Main;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Skull;
@@ -14,11 +13,14 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.List;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class QuantumCube {
     private final Skull quantumCube;
+    private static String quantumCubeItemName;
+    private static String quantumCubeItemLore;
+    private static String quantumCubeItemTexture;
 
     private QuantumCube(Location skullLocation) {
         quantumCube = (Skull) skullLocation.getBlock().getState();
@@ -43,17 +45,24 @@ public class QuantumCube {
         return !"Unused Quantum Cube".equals(quantumCube.getOwnerProfile().getName());
     }
 
+    public static void setItemValues(String quantumCubeItemName, String quantumCubeItemLore, String quantumCubeItemTexture) {
+        QuantumCube.quantumCubeItemName = quantumCubeItemName;
+        QuantumCube.quantumCubeItemLore = quantumCubeItemLore;
+        QuantumCube.quantumCubeItemTexture = quantumCubeItemTexture;
+    }
+
     public static ItemStack getItem(int amount) {
         ItemStack newQuantumCubeItem = new ItemStack(Material.PLAYER_HEAD);
         ItemMeta newQuantumCubeItemMeta = newQuantumCubeItem.getItemMeta();
         PlayerProfile dummyPlayer = getDummyProfile("Unused Quantum Cube");
 
         newQuantumCubeItem.setAmount(amount);
-        newQuantumCubeItemMeta.setDisplayName(ChatColor.AQUA + "Quantum Cube");
-        newQuantumCubeItemMeta.setLore(List.of("A weird cube. Some say it", "responds to one's deepest", "heart's desires."));
+        Main.getInstance().getServer().getConsoleSender().sendMessage(quantumCubeItemTexture);
+        newQuantumCubeItemMeta.setDisplayName(quantumCubeItemName);
+        newQuantumCubeItemMeta.setLore(Arrays.stream(quantumCubeItemLore.split("\n")).toList());
 
         try {
-            dummyPlayer.getTextures().setSkin(new URI("https://textures.minecraft.net/texture/7999050775dd5a524735284cbbac45aa392c0ac8fa980bd24c331552b654b824").toURL());
+            dummyPlayer.getTextures().setSkin(new URI(quantumCubeItemTexture).toURL());
         } catch (MalformedURLException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
