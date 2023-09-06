@@ -5,7 +5,9 @@ This is just a **Spigot plugin** that allows users to access the vast database o
 
 _Currently supporting: 1.20 & 1.20.1_
 ## Demonstration
+<p align="center">
 <img src="https://github.com/Axyss/QuantumCubes/assets/55812692/abb5fe2b-986e-46e0-bb73-58c4e49339a1" alt="Computer man" width="500px" text-align="right">
+</p>
 
 ## Commands
 - **/qc give** \<player\> [amount] - Gives a certain player the selected amount of Quantum Cubes
