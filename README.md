@@ -1,7 +1,7 @@
 <img src="https://media.discordapp.net/attachments/794706722588983327/1149100624995172393/0c8b4921ee384ed0a657f00df782c57e.png" alt="quantum_cubes_logo" align="right" width="180"></img>
 # Quantum Cubes
 ## What's this?
-**Spigot plugin** that allows users to access the vast database of [Minecraft Heads](https://minecraft-heads.com/) in an easy and intuitive way!
+This is just a **Spigot plugin** that allows users to access the vast database of [Minecraft Heads](https://minecraft-heads.com/) in an easy and intuitive way!
 
 _Currently supporting: 1.20 & 1.20.1_
 ## Demonstration
