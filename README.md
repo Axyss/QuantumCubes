@@ -2,6 +2,8 @@
 # Quantum Cubes
 ## What's this?
 **Spigot plugin** that allows users to access the vast database of [Minecraft Heads](https://minecraft-heads.com/) in an easy and intuitive way!
+
+_Currently supporting: 1.20 & 1.20.1_
 ## Demonstration
 <img src="https://github.com/Axyss/QuantumCubes/assets/55812692/abb5fe2b-986e-46e0-bb73-58c4e49339a1" alt="Computer man" width="500px" text-align="right">
 
