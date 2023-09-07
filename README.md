@@ -11,8 +11,12 @@ _Currently supporting: 1.20 & 1.20.1_
 
 ## Commands
 - **/qc give** \<player\> [amount] - Gives a certain player the selected amount of Quantum Cubes
+
 ## Permissions
-- **quantumcubes.give** - Controls usage of the /qc give command _(Default: OP)_
-- **quantumcubes.use** - Controls usage of the Quantum Cubes themselves _(Default: Everyone)_
+| Permission Node         | Description                                       | Default Setting  |
+|-------------------------|---------------------------------------------------|------------------|
+| quantumcubes.give       | Controls usage of the /qc give command          | OP               |
+| quantumcubes.use        | Controls usage of the Quantum Cubes themselves  | Everyone         |
+
 ## License
 MIT license, do as you wish while you acknowledge my work :)
