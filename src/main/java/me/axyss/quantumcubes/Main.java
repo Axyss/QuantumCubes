@@ -7,6 +7,7 @@ import me.axyss.quantumcubes.commands.give.GiveTabCompleter;
 import me.axyss.quantumcubes.data.QuantumCube;
 import me.axyss.quantumcubes.gui.sign.SignGui;
 import me.axyss.quantumcubes.listeners.QuantumCubeListeners;
+import me.axyss.quantumcubes.utils.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -35,5 +36,6 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new QuantumCubeListeners(protocolManager), this);
         this.getCommand("quantumcubes").setExecutor(new GiveCommand());
         this.getCommand("quantumcubes").setTabCompleter(new GiveTabCompleter());
+        Metrics metrics = new Metrics(this, 19747);
     }
 }
