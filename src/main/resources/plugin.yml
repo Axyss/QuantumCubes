@@ -3,6 +3,9 @@ version: 1.0.0
 author: Axyss
 main: me.axyss.quantumcubes.Main
 api-version: 1.13
+libraries:
+  - "org.xerial:sqlite-jdbc:3.43.0.0"
+  - "com.google.code.gson:gson:2.10.1"
 depend: [ProtocolLib]
 
 commands:

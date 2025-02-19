@@ -23,6 +23,8 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
     compileOnly 'org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT'
     compileOnly 'com.comphenix.protocol:ProtocolLib:5.0.0:'
+    compileOnly 'org.xerial:sqlite-jdbc:3.43.0.0'
+    compileOnly 'com.google.code.gson:gson:2.10.1'
 }
 
 test {
