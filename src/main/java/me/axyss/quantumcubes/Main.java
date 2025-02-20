@@ -9,7 +9,9 @@ import me.axyss.quantumcubes.data.QuantumCube;
 import me.axyss.quantumcubes.gui.sign.SignGui;
 import me.axyss.quantumcubes.listeners.QuantumCubeListeners;
 import me.axyss.quantumcubes.utils.Metrics;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitScheduler;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -17,6 +19,7 @@ import java.nio.file.Paths;
 
 public class Main extends JavaPlugin {
     private static JavaPlugin instance;
+    private static BukkitScheduler scheduler;
     private ProtocolManager protocolManager;
     private HeadDatabase headDB;
 
@@ -27,8 +30,15 @@ public class Main extends JavaPlugin {
     @Override
     public void onLoad() {
         instance = this;
+        scheduler = Bukkit.getScheduler();
         protocolManager = ProtocolLibrary.getProtocolManager();
-        headDB = new HeadDatabase(Paths.get(getDataFolder().getPath(), "heads.db"));
+        try {
+            headDB = new HeadDatabase(Paths.get(getDataFolder().getPath(), "heads.db"));
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -44,17 +54,20 @@ public class Main extends JavaPlugin {
         this.getCommand("quantumcubes").setExecutor(new GiveCommand());
         this.getCommand("quantumcubes").setTabCompleter(new GiveTabCompleter());
         Metrics metrics = new Metrics(this, 19747);
-        System.out.println(getDataFolder());
 
-        new Thread(() -> {
-            try {
-                headDB.refreshHeadData();
-            } catch (URISyntaxException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }).start();
+        try {
+            scheduler.runTaskTimerAsynchronously(this, () -> {
+                try {
+                    headDB.refreshHeadData();
+                } catch (URISyntaxException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }, Math.max(0L, 604800L - headDB.getSecondsSinceLastRefresh()) * 20L, 604800L * 20L);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
