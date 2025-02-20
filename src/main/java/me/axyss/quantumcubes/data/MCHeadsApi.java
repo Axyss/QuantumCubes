@@ -1,4 +1,4 @@
-package me.axyss.quantumcubes.utils;
+package me.axyss.quantumcubes.data;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
