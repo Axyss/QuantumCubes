@@ -19,13 +19,13 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class QuantumCube {
-    private final Skull quantumCube;
-    private static String quantumCubeItemName;
-    private static List<String> quantumCubeItemLore;
-    private static String quantumCubeItemTexture;
+    private final Skull head;
+    private static String itemName;
+    private static List<String> itemLore;
+    private static String itemTextureLink;
 
     private QuantumCube(Location skullLocation) {
-        quantumCube = (Skull) skullLocation.getBlock().getState();
+        head = (Skull) skullLocation.getBlock().getState();
     }
 
     public static QuantumCube fromLocation(Location skullLocation) {
@@ -38,12 +38,12 @@ public class QuantumCube {
         PlayerProfile dummyPlayer = getDummyProfile("Unused Quantum Cube");
 
         newQuantumCubeItem.setAmount(amount);
-        Main.getInstance().getServer().getConsoleSender().sendMessage(quantumCubeItemTexture);
-        newQuantumCubeItemMeta.setDisplayName(quantumCubeItemName);
-        newQuantumCubeItemMeta.setLore(quantumCubeItemLore);
+        Main.getInstance().getServer().getConsoleSender().sendMessage(itemTextureLink);
+        newQuantumCubeItemMeta.setDisplayName(itemName);
+        newQuantumCubeItemMeta.setLore(itemLore);
 
         try {
-            dummyPlayer.getTextures().setSkin(new URI(quantumCubeItemTexture).toURL());
+            dummyPlayer.getTextures().setSkin(new URI(itemTextureLink).toURL());
         } catch (MalformedURLException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -54,12 +54,12 @@ public class QuantumCube {
     }
 
     public static void setDefaultItemValues(String quantumCubeItemName, List<String> quantumCubeItemLore, String quantumCubeItemTexture) {
-        QuantumCube.quantumCubeItemName = ChatColor.translateAlternateColorCodes('&', quantumCubeItemName);
-        QuantumCube.quantumCubeItemLore = quantumCubeItemLore
+        QuantumCube.itemName = ChatColor.translateAlternateColorCodes('&', quantumCubeItemName);
+        QuantumCube.itemLore = quantumCubeItemLore
                 .stream()
                 .map(loreLine -> ChatColor.translateAlternateColorCodes('&', loreLine))
                 .collect(Collectors.toList());
-        QuantumCube.quantumCubeItemTexture = quantumCubeItemTexture;
+        QuantumCube.itemTextureLink = quantumCubeItemTexture;
     }
 
     private static PlayerProfile getDummyProfile(String username) {
@@ -69,15 +69,15 @@ public class QuantumCube {
     public void applyTexture(String textureName, URL textureLink) {
         PlayerProfile dummyPlayer = getDummyProfile(textureName);
         dummyPlayer.getTextures().setSkin(textureLink);
-        quantumCube.setOwnerProfile(dummyPlayer);
-        quantumCube.update();
+        head.setOwnerProfile(dummyPlayer);
+        head.update();
     }
 
     public Location getLocation() {
-        return quantumCube.getLocation();
+        return head.getLocation();
     }
 
     public boolean isUsed() {
-        return !"Unused Quantum Cube".equals(quantumCube.getOwnerProfile().getName());
+        return !"Unused Quantum Cube".equals(head.getOwnerProfile().getName());
     }
 }
