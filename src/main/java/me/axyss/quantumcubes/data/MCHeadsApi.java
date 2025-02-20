@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MCHeadsApi {
+class MCHeadsApi {
     private static final Pattern texturesLink = Pattern.compile("http(s)?://textures.minecraft.net/texture/.*?(?=\")");
     private static final String[] categories = {"alphabet", "animals", "blocks", "decoration", "food-drinks",
                                                 "humans", "humanoid", "miscellaneous", "monsters", "plants"};
