@@ -21,7 +21,7 @@ jar {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
-    compileOnly 'org.spigotmc:spigot-api:1.21.4-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT'
     compileOnly 'com.comphenix.protocol:ProtocolLib:5.0.0:'
     compileOnly 'org.xerial:sqlite-jdbc:3.43.0.0'
     compileOnly 'com.google.code.gson:gson:2.10.1'

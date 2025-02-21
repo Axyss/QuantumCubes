@@ -52,7 +52,6 @@ public class HeadDatabase {
             }
             statement.executeBatch();
             connection.commit();
-            System.out.println("Committed changes!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
