@@ -79,7 +79,9 @@ public class HeadDatabase {
             selectStatement.setString(1, headId);
             String textureUrl = selectStatement.executeQuery().getString("texture");
             return new URL(textureUrl);
-        } catch (SQLException | MalformedURLException e) {
+        } catch (MalformedURLException e) {
+            return null;
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

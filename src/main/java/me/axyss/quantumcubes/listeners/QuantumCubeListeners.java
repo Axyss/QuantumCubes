@@ -16,6 +16,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.net.URL;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,22 +51,20 @@ public class QuantumCubeListeners implements Listener {
         Player interactingPlayer = event.getPlayer();
         String headId = event.getInputText();
         List<Object> quantumCubeGuiPair = eventSharedStorage.extract(interactingPlayer.getUniqueId());
+        URL headTexture;
 
-        if (quantumCubeGuiPair == null) {
+        if (quantumCubeGuiPair == null || (headTexture = headDB.getHeadTextureURL(headId)) == null) {
             event.setCancelled(true);
-            return;
-        }
-        QuantumCube quantumCube = (QuantumCube) quantumCubeGuiPair.get(0);
-        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            try {
-                quantumCube.applyTexture(headId, headDB.getHeadTextureURL(headId));
+        } else {
+            QuantumCube quantumCube = (QuantumCube) quantumCubeGuiPair.get(0);
+            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+                quantumCube.applyTexture(headId, headTexture);
                 interactingPlayer.playSound(interactingPlayer, Sound.ENTITY_ENDERMAN_TELEPORT, 0.5f, 1.0f);
                 interactingPlayer.spawnParticle(Particle.DRAGON_BREATH,
-                        quantumCube.getLocation().add(0.5, 0.5, 0.5),
-                        60, 0.0, 0.0, 0.0, 0.2
+                        quantumCube.getLocation().add(0.5, 0.5, 0.5), 60, 0.0, 0.0, 0.0, 0.2
                 );
-            } catch (NumberFormatException ignored) {}
-        });
+            });
+        }
         ((IGui) quantumCubeGuiPair.get(1)).close();
     }
 
