@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 class MCHeadsApi {
     private static final String endpoint = "https://minecraft-heads.com/scripts/api.php?cat=%s&ids=true";

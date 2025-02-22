@@ -1,4 +1,5 @@
 package me.axyss.quantumcubes.data;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -14,7 +15,6 @@ import java.nio.file.attribute.FileTime;
 import java.sql.*;
 import java.time.Instant;
 import java.util.Base64;
-
 
 public class HeadDatabase {
     private final Connection connection;

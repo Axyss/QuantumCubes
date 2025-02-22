@@ -5,7 +5,6 @@ import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
-import me.axyss.quantumcubes.Main;
 import me.axyss.quantumcubes.gui.IGui;
 import me.axyss.quantumcubes.listeners.InputSubmittedEvent;
 import org.bukkit.Bukkit;

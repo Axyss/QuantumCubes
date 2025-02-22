@@ -1,7 +1,6 @@
 package me.axyss.quantumcubes.listeners;
 
 import com.comphenix.protocol.ProtocolManager;
-import me.axyss.quantumcubes.Main;
 import me.axyss.quantumcubes.data.HeadDatabase;
 import me.axyss.quantumcubes.data.QuantumCube;
 import me.axyss.quantumcubes.gui.IGui;
@@ -17,7 +16,6 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
