@@ -17,18 +17,12 @@ import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
 public class Main extends JavaPlugin {
-    private static JavaPlugin instance;
     private ProtocolManager protocolManager;
     private HeadDatabase headDB;
     private Metrics metrics;
 
-    private static JavaPlugin getInstance() {
-        return instance;
-    }
-
     @Override
     public void onLoad() {
-        instance = this;
         protocolManager = ProtocolLibrary.getProtocolManager();
         QuantumCube.setPlugin(this);
 
@@ -49,8 +43,8 @@ public class Main extends JavaPlugin {
                 this.getConfig().getStringList("qc-default-lore"),
                 this.getConfig().getString("qc-default-texture")
         );
-        protocolManager.addPacketListener(SignGui.getPacketAdapter(this));
-        getServer().getPluginManager().registerEvents(new QuantumCubeListeners(protocolManager, headDB), this);
+        protocolManager.addPacketListener(SignGui.createPacketAdapter(this));
+        getServer().getPluginManager().registerEvents(new QuantumCubeListeners(this, protocolManager, headDB), this);
         this.getCommand("quantumcubes").setExecutor(new GiveCommand());
         this.getCommand("quantumcubes").setTabCompleter(new GiveTabCompleter());
         metrics = new Metrics(this, 19747);

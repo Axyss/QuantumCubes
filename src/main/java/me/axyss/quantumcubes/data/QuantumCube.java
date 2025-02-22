@@ -1,6 +1,5 @@
 package me.axyss.quantumcubes.data;
 
-import me.axyss.quantumcubes.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -8,6 +7,7 @@ import org.bukkit.block.Skull;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.profile.PlayerProfile;
 
 import java.net.MalformedURLException;
@@ -23,9 +23,14 @@ public class QuantumCube {
     private static String itemName;
     private static List<String> itemLore;
     private static String itemTextureLink;
+    private static JavaPlugin plugin;
 
     private QuantumCube(Location skullLocation) {
         head = (Skull) skullLocation.getBlock().getState();
+    }
+
+    public static void setPlugin(JavaPlugin plugin) {
+        QuantumCube.plugin = plugin;
     }
 
     public static QuantumCube fromLocation(Location skullLocation) {
@@ -38,7 +43,6 @@ public class QuantumCube {
         PlayerProfile dummyPlayer = getDummyProfile("Unused Quantum Cube");
 
         newQuantumCubeItem.setAmount(amount);
-        Main.getInstance().getServer().getConsoleSender().sendMessage(itemTextureLink);
         newQuantumCubeItemMeta.setDisplayName(itemName);
         newQuantumCubeItemMeta.setLore(itemLore);
 
@@ -63,7 +67,7 @@ public class QuantumCube {
     }
 
     private static PlayerProfile getDummyProfile(String username) {
-        return Main.getInstance().getServer().createPlayerProfile(UUID.randomUUID(), username);
+        return plugin.getServer().createPlayerProfile(UUID.randomUUID(), username);
     }
 
     public void applyTexture(String textureName, URL textureLink) {

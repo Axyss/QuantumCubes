@@ -11,6 +11,7 @@ import me.axyss.quantumcubes.listeners.InputSubmittedEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
 public class SignGui implements IGui {
@@ -36,8 +37,8 @@ public class SignGui implements IGui {
         sign.dematerialize();
     }
 
-    public static PacketAdapter getPacketAdapter() {
-        return new PacketAdapter(Main.getInstance(), ListenerPriority.NORMAL, PacketType.Play.Client.UPDATE_SIGN) {
+    public static PacketAdapter createPacketAdapter(JavaPlugin plugin) {
+        return new PacketAdapter(plugin, ListenerPriority.NORMAL, PacketType.Play.Client.UPDATE_SIGN) {
             @Override
             public void onPacketReceiving(PacketEvent event) {
                 try {
