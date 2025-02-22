@@ -40,15 +40,12 @@ public class SignGui implements IGui {
         return new PacketAdapter(plugin, ListenerPriority.NORMAL, PacketType.Play.Client.UPDATE_SIGN) {
             @Override
             public void onPacketReceiving(PacketEvent event) {
-                try {
-                    plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-                        Bukkit.getServer().getPluginManager().callEvent(
-                                new InputSubmittedEvent(
-                                        event.getPacket().getStringArrays().read(0)[0],
-                                        event.getPlayer()
-                                ));
-                    });
-                } catch (NumberFormatException ignored) {}
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () ->
+                    Bukkit.getServer().getPluginManager().callEvent(
+                    new InputSubmittedEvent(
+                            event.getPacket().getStringArrays().read(0)[0],
+                            event.getPlayer()
+                    )));
             }
         };
     }

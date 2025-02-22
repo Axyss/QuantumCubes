@@ -60,7 +60,8 @@ public class QuantumCubeListeners implements Listener {
             plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 quantumCube.applyTexture(headId, headTexture);
                 interactingPlayer.playSound(interactingPlayer, Sound.ENTITY_ENDERMAN_TELEPORT, 0.5f, 1.0f);
-                interactingPlayer.spawnParticle(Particle.DRAGON_BREATH,
+                interactingPlayer.spawnParticle(
+                        Particle.DRAGON_BREATH,
                         quantumCube.getLocation().add(0.5, 0.5, 0.5), 60, 0.0, 0.0, 0.0, 0.2
                 );
             });

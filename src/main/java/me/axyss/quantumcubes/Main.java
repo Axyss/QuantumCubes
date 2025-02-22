@@ -18,6 +18,7 @@ public class Main extends JavaPlugin {
     private ProtocolManager protocolManager;
     private HeadDatabase headDB;
     private Metrics metrics;
+    private long dbRefreshInterval;
 
     @Override
     public void onLoad() {
@@ -30,6 +31,7 @@ public class Main extends JavaPlugin {
         );
         protocolManager = ProtocolLibrary.getProtocolManager();
         headDB = new HeadDatabase(Paths.get(getDataFolder().getPath(), "heads.db"));
+        dbRefreshInterval = getConfig().getLong("db-refresh-interval");
     }
 
     @Override
@@ -45,7 +47,7 @@ public class Main extends JavaPlugin {
         // Scheduled task for database refreshing
         Bukkit.getScheduler().runTaskTimerAsynchronously(
                 this, () -> headDB.refreshHeadData(),
-                Math.max(0L, 604800L - headDB.getSecondsSinceLastRefresh()) * 20L, 604800L * 20L);
+                Math.max(0L, dbRefreshInterval - headDB.getSecondsSinceLastRefresh()) * 20L, dbRefreshInterval * 20L);
 
         // Telemetry
         metrics = new Metrics(this, 19747);
