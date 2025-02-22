@@ -20,30 +20,33 @@ public class HeadDatabase {
     private final Connection connection;
     private final Path dbPath;
 
-    public HeadDatabase(Path dbPath) throws URISyntaxException, IOException {
+    public HeadDatabase(Path dbPath) {
         this.dbPath = dbPath;
         boolean isNewDatabase = !Files.exists(dbPath);
+
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
             connection.prepareStatement("CREATE TABLE IF NOT EXISTS heads (id INTEGER PRIMARY KEY, texture TEXT)").execute();
-            if (isNewDatabase) {
-                refreshHeadData();
-            }
+            if (isNewDatabase) refreshHeadData();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public long getSecondsSinceLastRefresh() throws IOException {
-        FileTime fileTime = Files.getLastModifiedTime(dbPath);
-        return Instant.now().getEpochSecond() - fileTime.toInstant().getEpochSecond();
+    public long getSecondsSinceLastRefresh() {
+        try {
+            FileTime fileTime = Files.getLastModifiedTime(dbPath);
+            return Instant.now().getEpochSecond() - fileTime.toInstant().getEpochSecond();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void refreshHeadData() throws URISyntaxException, IOException {
+    public void refreshHeadData() {
         String sql = "INSERT OR IGNORE INTO heads (id, texture) VALUES (?, ?)";
-        JsonArray headArray = MCHeadsApi.fetchAllHeads();
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            JsonArray headArray = MCHeadsApi.fetchAllHeads();
             connection.setAutoCommit(false); // Crucial for batch processing
             for (JsonElement headObject: headArray) {
                 statement.setString(1, ((JsonObject) headObject).get("id").getAsString());
@@ -52,8 +55,8 @@ public class HeadDatabase {
             }
             statement.executeBatch();
             connection.commit();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException | URISyntaxException | IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -68,12 +71,9 @@ public class HeadDatabase {
             selectStatement.setString(1, headId);
             String textureUrl = selectStatement.executeQuery().getString("texture");
             return new URL(textureUrl);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
+        } catch (SQLException | MalformedURLException e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
 }
 

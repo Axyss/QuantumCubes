@@ -12,8 +12,6 @@ import me.axyss.quantumcubes.utils.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
 public class Main extends JavaPlugin {
@@ -23,45 +21,34 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        protocolManager = ProtocolLibrary.getProtocolManager();
+        saveDefaultConfig();
         QuantumCube.setPlugin(this);
-
-        try {
-            headDB = new HeadDatabase(Paths.get(getDataFolder().getPath(), "heads.db"));
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        QuantumCube.setDefaultItemValues(
+                getConfig().getString("qc-default-name"),
+                getConfig().getStringList("qc-default-lore"),
+                getConfig().getString("qc-default-texture")
+        );
+        protocolManager = ProtocolLibrary.getProtocolManager();
+        headDB = new HeadDatabase(Paths.get(getDataFolder().getPath(), "heads.db"));
     }
 
     @Override
     public void onEnable() {
-        this.saveDefaultConfig();
-        QuantumCube.setDefaultItemValues(
-                this.getConfig().getString("qc-default-name"),
-                this.getConfig().getStringList("qc-default-lore"),
-                this.getConfig().getString("qc-default-texture")
-        );
+        // Commands
+        getCommand("quantumcubes").setExecutor(new GiveCommand());
+        getCommand("quantumcubes").setTabCompleter(new GiveTabCompleter());
+
+        // Listeners
         protocolManager.addPacketListener(SignGui.createPacketAdapter(this));
         getServer().getPluginManager().registerEvents(new QuantumCubeListeners(this, protocolManager, headDB), this);
-        this.getCommand("quantumcubes").setExecutor(new GiveCommand());
-        this.getCommand("quantumcubes").setTabCompleter(new GiveTabCompleter());
-        metrics = new Metrics(this, 19747);
 
-        try {
-            Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
-                try {
-                    headDB.refreshHeadData();
-                } catch (URISyntaxException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }, Math.max(0L, 604800L - headDB.getSecondsSinceLastRefresh()) * 20L, 604800L * 20L);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        // Scheduled task for database refreshing
+        Bukkit.getScheduler().runTaskTimerAsynchronously(
+                this, () -> headDB.refreshHeadData(),
+                Math.max(0L, 604800L - headDB.getSecondsSinceLastRefresh()) * 20L, 604800L * 20L);
+
+        // Telemetry
+        metrics = new Metrics(this, 19747);
     }
 
     @Override
