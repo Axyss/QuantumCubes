@@ -53,6 +53,6 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // todo close db connection
+        headDB.close();
     }
 }

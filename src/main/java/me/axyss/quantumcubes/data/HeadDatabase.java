@@ -33,6 +33,14 @@ public class HeadDatabase {
         }
     }
 
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public long getSecondsSinceLastRefresh() {
         try {
             FileTime fileTime = Files.getLastModifiedTime(dbPath);
