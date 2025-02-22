@@ -13,12 +13,12 @@ public class GiveCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player giveToPlayer;
-        int giveAmount = 1;
+        int defaultAmount = 1;
 
         // Manages [amount]
         if (args.length == 3) {
             try {
-                giveAmount = Integer.parseInt(args[2]);
+                defaultAmount = Integer.parseInt(args[2]);
             } catch (NumberFormatException err) {
                 return false;
             }
@@ -26,7 +26,7 @@ public class GiveCommand implements CommandExecutor {
 
         // Manages /gc give <player>
         if ((args.length == 2 || args.length == 3) && "give".equals(args[0]) && (giveToPlayer = Bukkit.getPlayer(args[1])) != null) {
-            giveToPlayer.getInventory().addItem(QuantumCube.getItem(giveAmount));
+            giveToPlayer.getInventory().addItem(QuantumCube.getItem(defaultAmount));
             giveToPlayer.playSound(giveToPlayer, Sound.ENTITY_ITEM_PICKUP, 0.6f, 1.0f);
             return true;
         }

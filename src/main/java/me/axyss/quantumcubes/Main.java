@@ -11,7 +11,6 @@ import me.axyss.quantumcubes.listeners.QuantumCubeListeners;
 import me.axyss.quantumcubes.utils.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitScheduler;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -19,19 +18,20 @@ import java.nio.file.Paths;
 
 public class Main extends JavaPlugin {
     private static JavaPlugin instance;
-    private static BukkitScheduler scheduler;
     private ProtocolManager protocolManager;
     private HeadDatabase headDB;
+    private Metrics metrics;
 
-    public static JavaPlugin getInstance() {
+    private static JavaPlugin getInstance() {
         return instance;
     }
 
     @Override
     public void onLoad() {
         instance = this;
-        scheduler = Bukkit.getScheduler();
         protocolManager = ProtocolLibrary.getProtocolManager();
+        QuantumCube.setPlugin(this);
+
         try {
             headDB = new HeadDatabase(Paths.get(getDataFolder().getPath(), "heads.db"));
         } catch (URISyntaxException e) {
@@ -49,14 +49,14 @@ public class Main extends JavaPlugin {
                 this.getConfig().getStringList("qc-default-lore"),
                 this.getConfig().getString("qc-default-texture")
         );
-        protocolManager.addPacketListener(SignGui.getPacketAdapter());
+        protocolManager.addPacketListener(SignGui.getPacketAdapter(this));
         getServer().getPluginManager().registerEvents(new QuantumCubeListeners(protocolManager, headDB), this);
         this.getCommand("quantumcubes").setExecutor(new GiveCommand());
         this.getCommand("quantumcubes").setTabCompleter(new GiveTabCompleter());
-        Metrics metrics = new Metrics(this, 19747);
+        metrics = new Metrics(this, 19747);
 
         try {
-            scheduler.runTaskTimerAsynchronously(this, () -> {
+            Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
                 try {
                     headDB.refreshHeadData();
                 } catch (URISyntaxException e) {
