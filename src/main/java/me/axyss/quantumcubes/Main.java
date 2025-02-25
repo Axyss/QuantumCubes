@@ -35,7 +35,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         // Commands
-        QuantumCubesCommand rootCommand = new QuantumCubesCommand();
+        QuantumCubesCommand rootCommand = new QuantumCubesCommand(this, headDB);
         getCommand("quantumcubes").setExecutor(rootCommand);
         getCommand("quantumcubes").setTabCompleter(rootCommand);
 
