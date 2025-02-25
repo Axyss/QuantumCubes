@@ -9,14 +9,16 @@ libraries:
 depend: [ProtocolLib]
 
 commands:
-  QuantumCubes:
-    description: Gives a player a certain amount of Quantum Cubes
+  quantumcubes:
+    description: Gives a player a certain amount of cubes
     aliases: qc
     usage: "§4Usage: /quantumcubes give <player> [amount]"
     permission: quantumcubes.give
 
 permissions:
   quantumcubes.give:
+    default: op
+  quantumcubes.refresh:
     default: op
   quantumcubes.use:
     default: true

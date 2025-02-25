@@ -2,8 +2,7 @@ package me.axyss.quantumcubes;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import me.axyss.quantumcubes.commands.give.GiveCommand;
-import me.axyss.quantumcubes.commands.give.GiveTabCompleter;
+import me.axyss.quantumcubes.commands.QuantumCubesCommand;
 import me.axyss.quantumcubes.data.HeadDatabase;
 import me.axyss.quantumcubes.data.QuantumCube;
 import me.axyss.quantumcubes.gui.sign.SignGui;
@@ -17,7 +16,6 @@ import java.nio.file.Paths;
 public class Main extends JavaPlugin {
     private ProtocolManager protocolManager;
     private HeadDatabase headDB;
-    private Metrics metrics;
     private long dbRefreshInterval;
 
     @Override
@@ -37,8 +35,9 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         // Commands
-        getCommand("quantumcubes").setExecutor(new GiveCommand());
-        getCommand("quantumcubes").setTabCompleter(new GiveTabCompleter());
+        QuantumCubesCommand rootCommand = new QuantumCubesCommand();
+        getCommand("quantumcubes").setExecutor(rootCommand);
+        getCommand("quantumcubes").setTabCompleter(rootCommand);
 
         // Listeners
         protocolManager.addPacketListener(SignGui.createPacketAdapter(this));
@@ -50,7 +49,7 @@ public class Main extends JavaPlugin {
                 Math.max(0L, dbRefreshInterval - headDB.getSecondsSinceLastRefresh()) * 20L, dbRefreshInterval * 20L);
 
         // Telemetry
-        metrics = new Metrics(this, 19747);
+        Metrics metrics = new Metrics(this, 19747);
     }
 
     @Override
