@@ -36,18 +36,23 @@ public class QuantumCubesCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            return null;
+        if (!(sender instanceof Player player)) {
+            return List.of();
         }
         if (args.length == 1) {
-            return subCommands.keySet().stream().filter(cmd -> cmd.startsWith(args[0].toLowerCase())).toList();
+            String typed = args[0].toLowerCase();
+            return subCommands.keySet().stream()
+                    .filter(cmd -> cmd.startsWith(typed))
+                    .filter(cmd -> player.hasPermission("quantumcubes." + cmd))
+                    .toList();
         }
 
-        SubCommand subCommand = subCommands.get(args[0].toLowerCase());
-        if (subCommand != null) {
-            return subCommand.tabComplete((Player) sender, args);
+        String subCommandKey = args[0].toLowerCase();
+        SubCommand subCommand = subCommands.get(subCommandKey);
+        if (subCommand != null && player.hasPermission("quantumcubes." + subCommandKey)) {
+            return subCommand.tabComplete(player, args);
         }
-        return null;
+        return List.of();
     }
 }
 

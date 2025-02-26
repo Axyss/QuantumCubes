@@ -13,7 +13,6 @@ commands:
     description: Gives a player a certain amount of cubes
     aliases: qc
     usage: "§4Usage: /quantumcubes give <player> [amount]"
-    permission: quantumcubes.give
 
 permissions:
   quantumcubes.give:
