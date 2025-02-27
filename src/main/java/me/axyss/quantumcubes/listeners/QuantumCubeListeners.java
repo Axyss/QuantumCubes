@@ -53,7 +53,12 @@ public class QuantumCubeListeners implements Listener {
         List<Object> quantumCubeGuiPair = eventSharedStorage.extract(interactingPlayer.getUniqueId());
         URL headTexture;
 
-        if (quantumCubeGuiPair == null || (headTexture = headDB.getHeadTextureURL(headId)) == null) {
+        if (quantumCubeGuiPair == null) {
+            event.setCancelled(true);
+            return;
+        }
+
+        if ((headTexture = headDB.getHeadTextureURL(headId)) == null) {
             event.setCancelled(true);
         } else {
             QuantumCube quantumCube = (QuantumCube) quantumCubeGuiPair.get(0);
