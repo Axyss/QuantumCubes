@@ -6,6 +6,9 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.BlockPosition;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.TileState;
 import org.bukkit.entity.Player;
 
 class FakeSign {
@@ -45,7 +48,9 @@ class FakeSign {
         if (getLocation() == null) {
             throw new IllegalStateException("FakeSign has already been dematerialized.");
         } else {
-            fooledPlayer.sendBlockChange(getLocation(), currentLocation.getWorld().getBlockData(getLocation()));
+            Block previousBlock = currentLocation.getWorld().getBlockAt(getLocation());
+            fooledPlayer.sendBlockChange(getLocation(), previousBlock.getBlockData());
+            previousBlock.getState().update();
             currentLocation = null;
         }
     }
