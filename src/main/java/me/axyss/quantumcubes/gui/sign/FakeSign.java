@@ -31,12 +31,12 @@ class FakeSign {
         return currentLocation;
     }
 
-    public void materialize(Location location) {
+    public void materialize(Location location, Material signType) {
         if (getLocation() != null) {
             throw new IllegalStateException("FakeSign has already been materialized.");
         } else {
             this.currentLocation = location;
-            fooledPlayer.sendBlockChange(getLocation(), Material.BIRCH_WALL_SIGN.createBlockData());
+            fooledPlayer.sendBlockChange(getLocation(), signType.createBlockData());
             fooledPlayer.sendSignChange(getLocation(), getText());
         }
     }

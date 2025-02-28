@@ -40,7 +40,7 @@ public class QuantumCubeListeners implements Listener {
         }
         QuantumCube placedQuantumCube = QuantumCube.fromLocation(event.getBlockPlaced().getLocation());
         if (!placedQuantumCube.isUsed() && event.getPlayer().hasPermission("quantumcubes.use")) {
-            IGui playerGui = new SignGui(manager, event.getPlayer());
+            IGui playerGui = new SignGui(manager, plugin.getConfig(), event.getPlayer());
             playerGui.open();
             eventSharedStorage.insert(event.getPlayer().getUniqueId(), List.of(placedQuantumCube, playerGui));
         }

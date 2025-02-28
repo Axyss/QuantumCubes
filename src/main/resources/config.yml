@@ -8,8 +8,16 @@ qc-default-lore:
   - "&6it appears to be unstable."
 qc-default-texture: "https://textures.minecraft.net/texture/7999050775dd5a524735284cbbac45aa392c0ac8fa980bd24c331552b654b824"
 
-# Amount of time (in seconds) between each refresh of the internal head database
-db-refresh-interval: 604800 # 604800 = 1 week
+sign-gui-text:
+  - "Introduce a"
+  - "Minecraft-Heads"
+  - "Identifier"
+sign-type: birch
 
+
+# Amount of time (in seconds) between each refresh of the internal head database (604800 = 1 week)
+db-refresh-interval: 604800
+
+# Development config
 config-version: 1  # Internal value, do not modify!
 debug: false
