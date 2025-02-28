@@ -62,7 +62,7 @@ public class QuantumCubeListeners implements Listener {
             event.setCancelled(true);
         } else {
             QuantumCube quantumCube = (QuantumCube) quantumCubeGuiPair.get(0);
-            plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+            plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
                 quantumCube.applyTexture(headId, headTexture);
                 interactingPlayer.playSound(interactingPlayer, Sound.ENTITY_ENDERMAN_TELEPORT, 0.5f, 1.0f);
                 interactingPlayer.spawnParticle(
