@@ -26,9 +26,10 @@ public class QuantumCubesCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args.length == 0 || !subCommands.containsKey(args[0].toLowerCase())) {
+        String subcommand = args[0].toLowerCase();
+        if (args.length == 0) {
             subCommands.get("help").execute(sender, args);
-        } else {
+        } else if (subCommands.containsKey(args[0].toLowerCase()) && sender.hasPermission("quantumcubes." + args[0].toLowerCase())) {
             subCommands.get(args[0].toLowerCase()).execute(sender, args);
         }
         return true;

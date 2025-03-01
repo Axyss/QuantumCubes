@@ -15,6 +15,8 @@ commands:
     usage: "§4Usage: /quantumcubes give <player> [amount]"
 
 permissions:
+  quantumcubes.help:
+    default: op
   quantumcubes.give:
     default: op
   quantumcubes.refresh:
