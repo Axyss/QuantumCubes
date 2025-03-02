@@ -16,23 +16,23 @@ import java.util.List;
 import java.util.Map;
 
 public class QuantumCubesCommand implements CommandExecutor, TabCompleter {
-    private final Map<String, SubCommand> subCommands = new HashMap<>();
+    private final Map<String, SubCommand> allowedSubcommands = new HashMap<>();
 
     public QuantumCubesCommand(JavaPlugin plugin, HeadDatabase headDB) {
-        subCommands.put("help", new HelpCommand());
-        subCommands.put("give", new GiveCommand());
-        subCommands.put("refresh", new RefreshCommand(plugin, headDB));
+        allowedSubcommands.put("help", new HelpCommand());
+        allowedSubcommands.put("give", new GiveCommand());
+        allowedSubcommands.put("refresh", new RefreshCommand(plugin, headDB));
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        String subcommand = args[0].toLowerCase();
-        if (args.length == 0) {
-            subCommands.get("help").execute(sender, args);
-        } else if (subCommands.containsKey(args[0].toLowerCase()) && sender.hasPermission("quantumcubes." + args[0].toLowerCase())) {
-            subCommands.get(args[0].toLowerCase()).execute(sender, args);
+        String subcommand = args.length == 0 ? "help" : args[0];
+
+        if (allowedSubcommands.containsKey(subcommand) && sender.hasPermission("quantumcubes." + subcommand)) {
+            allowedSubcommands.get(subcommand).execute(sender, args);
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -42,14 +42,14 @@ public class QuantumCubesCommand implements CommandExecutor, TabCompleter {
         }
         if (args.length == 1) {
             String typed = args[0].toLowerCase();
-            return subCommands.keySet().stream()
+            return allowedSubcommands.keySet().stream()
                     .filter(cmd -> cmd.startsWith(typed))
                     .filter(cmd -> player.hasPermission("quantumcubes." + cmd))
                     .toList();
         }
 
         String subCommandKey = args[0].toLowerCase();
-        SubCommand subCommand = subCommands.get(subCommandKey);
+        SubCommand subCommand = allowedSubcommands.get(subCommandKey);
         if (subCommand != null && player.hasPermission("quantumcubes." + subCommandKey)) {
             return subCommand.tabComplete(player, args);
         }
