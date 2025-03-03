@@ -12,7 +12,6 @@ commands:
   quantumcubes:
     description: Gives a player a certain amount of cubes
     aliases: qc
-    usage: "§4Usage: /qc help"
 
 permissions:
   quantumcubes.help:

@@ -7,6 +7,7 @@ import me.axyss.quantumcubes.data.HeadDatabase;
 import me.axyss.quantumcubes.data.QuantumCube;
 import me.axyss.quantumcubes.gui.sign.SignGui;
 import me.axyss.quantumcubes.listeners.QuantumCubeListeners;
+import me.axyss.quantumcubes.utils.Language;
 import me.axyss.quantumcubes.utils.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,6 +22,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onLoad() {
         saveDefaultConfig();
+        Language.loadLangFile(this);
         QuantumCube.setPlugin(this);
         QuantumCube.setDefaultItemValues(
                 getConfig().getString("qc-default-name"),
