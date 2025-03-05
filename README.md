@@ -8,7 +8,7 @@
 . It enhances the Minecraft experience by allowing players to easily obtain custom heads in-game.
 </p>
 
-_Currently supporting: 1.20 & 1.20.1_
+❗**ProtocolLib and Minecraft versions 1.20/1.20.1 are required**
 
 ## How to use
 1. Go to <a href="https://minecraft-heads.com/">Minecraft Heads</a>
