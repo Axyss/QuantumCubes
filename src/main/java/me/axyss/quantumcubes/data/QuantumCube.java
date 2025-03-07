@@ -3,10 +3,12 @@ package me.axyss.quantumcubes.data;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.Skull;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.profile.PlayerProfile;
 
@@ -40,7 +42,7 @@ public class QuantumCube {
     public static ItemStack getItem(int amount) {
         ItemStack newQuantumCubeItem = new ItemStack(Material.PLAYER_HEAD);
         ItemMeta newQuantumCubeItemMeta = newQuantumCubeItem.getItemMeta();
-        PlayerProfile dummyPlayer = getDummyProfile("Unused Quantum Cube");
+        PlayerProfile dummyPlayer = getDummyProfile("FakeProfile");
 
         newQuantumCubeItem.setAmount(amount);
         newQuantumCubeItemMeta.setDisplayName(itemName);
@@ -82,6 +84,6 @@ public class QuantumCube {
     }
 
     public boolean isUsed() {
-        return !"Unused Quantum Cube".equals(head.getOwnerProfile().getName());
+        return head.getOwnerProfile() == null || !"FakeProfile".equals(head.getOwnerProfile().getName());
     }
 }
