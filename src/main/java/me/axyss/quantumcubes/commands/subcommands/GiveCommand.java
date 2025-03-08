@@ -2,6 +2,7 @@ package me.axyss.quantumcubes.commands.subcommands;
 
 import me.axyss.quantumcubes.commands.SubCommand;
 import me.axyss.quantumcubes.data.QuantumCube;
+import me.axyss.quantumcubes.utils.Language;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
@@ -10,25 +11,27 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 public class GiveCommand implements SubCommand {
+    private static final int defaultAmount = 1;
 
     @Override
     public void execute(CommandSender sender, String[] args) {
         Player giveToPlayer;
-        int defaultAmount = 1;
+        int amount = defaultAmount;
 
-        // Manages [amount]
+        if (args.length > 3 || args.length < 2 || (giveToPlayer = Bukkit.getPlayer(args[1])) == null) {
+            sender.sendMessage(Language.getMessage("invalid_syntax"));
+            return;
+        }
         if (args.length == 3) {
             try {
-                defaultAmount = Integer.parseInt(args[2]);
-            } catch (NumberFormatException err) {
+                amount = Integer.parseInt(args[2]);
+            } catch (NumberFormatException ignored) {
+                sender.sendMessage(Language.getMessage("invalid_syntax"));
+                return;
             }
         }
-
-        // Manages /gc give <player>
-        if ((giveToPlayer = Bukkit.getPlayer(args[1])) != null) {
-            giveToPlayer.getInventory().addItem(QuantumCube.getItem(defaultAmount));
-            giveToPlayer.playSound(giveToPlayer, Sound.ENTITY_ITEM_PICKUP, 0.6f, 1.0f);
-        }
+        giveToPlayer.getInventory().addItem(QuantumCube.getItem(amount));
+        giveToPlayer.playSound(giveToPlayer, Sound.ENTITY_ITEM_PICKUP, 0.6f, 1.0f);
     }
 
     @Override

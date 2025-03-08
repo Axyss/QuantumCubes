@@ -22,7 +22,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onLoad() {
         saveDefaultConfig();
-        //Language.loadLangFile(this);
+        Language.loadLangFile(this);
         QuantumCube.setPlugin(this);
         QuantumCube.setDefaultItemValues(
                 getConfig().getString("qc-default-name"),

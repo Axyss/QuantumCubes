@@ -61,7 +61,7 @@ public class QuantumCubeListeners implements Listener {
         if ((headTexture = headDB.getHeadTextureURL(headId)) == null) {
             event.setCancelled(true);
         } else {
-            QuantumCube quantumCube = (QuantumCube) quantumCubeGuiPair.get(0);
+            QuantumCube quantumCube = (QuantumCube) quantumCubeGuiPair.getFirst();
             plugin.getServer().getScheduler().runTask(plugin, () -> {
                 quantumCube.applyTexture(headId, headTexture);
                 interactingPlayer.playSound(interactingPlayer, Sound.ENTITY_ENDERMAN_TELEPORT, 0.5f, 1.0f);

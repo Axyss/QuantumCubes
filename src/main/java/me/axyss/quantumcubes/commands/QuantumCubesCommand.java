@@ -4,6 +4,7 @@ import me.axyss.quantumcubes.commands.subcommands.HelpCommand;
 import me.axyss.quantumcubes.commands.subcommands.GiveCommand;
 import me.axyss.quantumcubes.commands.subcommands.RefreshCommand;
 import me.axyss.quantumcubes.data.HeadDatabase;
+import me.axyss.quantumcubes.utils.Language;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,12 +29,16 @@ public class QuantumCubesCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String subcommand = args.length == 0 ? "help" : args[0];
 
-        if (allowedSubcommands.containsKey(subcommand) && sender.hasPermission("quantumcubes." + subcommand)) {
-            allowedSubcommands.get(subcommand).execute(sender, args);
-            return true;
-        } else {
+        if (!allowedSubcommands.containsKey(subcommand)) {
+            sender.sendMessage(Language.getMessage("invalid_syntax"));
             return false;
         }
+        if (!sender.hasPermission("quantumcubes." + subcommand)) {
+            sender.sendMessage(Language.getMessage("no_permission"));
+            return false;
+        }
+        allowedSubcommands.get(subcommand).execute(sender, args);
+        return true;
     }
 
     @Override

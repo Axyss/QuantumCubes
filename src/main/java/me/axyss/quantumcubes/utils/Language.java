@@ -1,5 +1,6 @@
 package me.axyss.quantumcubes.utils;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,7 +17,8 @@ public class Language {
         Language.langFile = YamlConfiguration.loadConfiguration(langFile);
     }
 
-    public static String getMessage(String message) {
-        return langFile.getString(message);
+    public static String getMessage(String messageKey) {
+        String message = langFile.getString("messages." + messageKey, "&cMessage not found!");
+        return ChatColor.translateAlternateColorCodes('&', message);
     }
 }

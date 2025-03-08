@@ -1,3 +1,10 @@
 messages:
-  invalid_syntax: "Invalid syntax. Use /qc help to check its correct usage."
-  no_permission: "&cYou do not have permission to use this command!"
+  invalid_syntax: "&cInvalid syntax. Use &9/qc help &cto check its correct usage."
+  no_permission: "&cYou do not have enough permissions to use this command!"
+  help: |
+    &b==== Quantum Cubes Help ====
+    &9/qc help &7- Shows this help message.
+    &9/qc give <player> [amount] &7- Gives a certain amount of cubes to a player.
+    &9/qc refresh &7- Forces a manual refresh of the internal head database.
+  refresh-start: "&aRefreshing head database... (this might take a bit)"
+  refresh-end: "&aHead database refreshed!"
