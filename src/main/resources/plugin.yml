@@ -4,13 +4,12 @@ author: Axyss
 main: me.axyss.quantumcubes.Main
 api-version: 1.21
 libraries:
-  - "org.xerial:sqlite-jdbc:3.43.0.0"
-  - "com.google.code.gson:gson:2.10.1"
+  - "org.xerial:sqlite-jdbc:3.49.1.0"
+  - "com.google.code.gson:gson:2.12.1"
 depend: [ProtocolLib]
 
 commands:
   quantumcubes:
-    description: Gives a player a certain amount of cubes
     aliases: qc
 
 permissions:

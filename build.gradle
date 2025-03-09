@@ -3,9 +3,12 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
-
 group 'me.axyss'
 version '1.1-SNAPSHOT'
+
+tasks.withType(JavaCompile) {
+    options.release = 21
+}
 
 repositories {
     mavenCentral()
@@ -16,7 +19,6 @@ repositories {
 jar {
     destinationDirectory.set(file("C:\\Users\\alexn\\Desktop\\Test Server 1.20.6\\plugins"))
 }
-
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
