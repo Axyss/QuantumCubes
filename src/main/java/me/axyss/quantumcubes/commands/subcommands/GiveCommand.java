@@ -19,14 +19,14 @@ public class GiveCommand implements SubCommand {
         int amount = defaultAmount;
 
         if (args.length > 3 || args.length < 2 || (giveToPlayer = Bukkit.getPlayer(args[1])) == null) {
-            sender.sendMessage(Language.getMessage("invalid_syntax"));
+            sender.sendMessage(Language.getMessage("invalid-syntax"));
             return;
         }
         if (args.length == 3) {
             try {
                 amount = Integer.parseInt(args[2]);
             } catch (NumberFormatException ignored) {
-                sender.sendMessage(Language.getMessage("invalid_syntax"));
+                sender.sendMessage(Language.getMessage("invalid-syntax"));
                 return;
             }
         }

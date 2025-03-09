@@ -21,4 +21,8 @@ public class Language {
         String message = langFile.getString("messages." + messageKey, "&cMessage not found!");
         return ChatColor.translateAlternateColorCodes('&', message);
     }
+
+    public static String getPrefixedMessage(String messageKey) {
+        return Language.getMessage("plugin-prefix") + " " + ChatColor.RESET + Language.getMessage(messageKey);
+    }
 }

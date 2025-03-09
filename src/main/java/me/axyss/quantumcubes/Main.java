@@ -44,7 +44,6 @@ public class Main extends JavaPlugin {
         // Listeners
         protocolManager.addPacketListener(SignGui.createPacketAdapter(this));
         getServer().getPluginManager().registerEvents(new QuantumCubeListeners(this, protocolManager, headDB), this);
-
         // Scheduled task for database refreshing
         Bukkit.getScheduler().runTaskTimerAsynchronously(
                 this, () -> headDB.refreshHeadData(),

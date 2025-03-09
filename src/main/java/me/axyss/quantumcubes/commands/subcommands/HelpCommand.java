@@ -8,7 +8,7 @@ public class HelpCommand implements SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (args.length > 1) {
-            sender.sendMessage(Language.getMessage("invalid_syntax"));
+            sender.sendMessage(Language.getMessage("invalid-syntax"));
             return;
         }
         sender.sendMessage(Language.getMessage("help"));

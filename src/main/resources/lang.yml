@@ -1,6 +1,10 @@
 messages:
-  invalid_syntax: "&cInvalid syntax. Use &9/qc help &cto check its correct usage."
-  no_permission: "&cYou do not have enough permissions to use this command!"
+  # General
+  plugin-prefix: "&7[&9QuantumCubes&7]"
+  invalid-syntax: "&cInvalid syntax. Use &9/qc help &cto check its correct usage."
+  no-permission: "&cYou do not have enough permissions to use this command!"
+
+  # Commands
   help: |
     &b==== Quantum Cubes Help ====
     &9/qc help &7- Shows this help message.

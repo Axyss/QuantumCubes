@@ -30,11 +30,11 @@ public class QuantumCubesCommand implements CommandExecutor, TabCompleter {
         String subcommand = args.length == 0 ? "help" : args[0];
 
         if (!allowedSubcommands.containsKey(subcommand)) {
-            sender.sendMessage(Language.getMessage("invalid_syntax"));
+            sender.sendMessage(Language.getMessage("invalid-syntax"));
             return false;
         }
         if (!sender.hasPermission("quantumcubes." + subcommand)) {
-            sender.sendMessage(Language.getMessage("no_permission"));
+            sender.sendMessage(Language.getMessage("no-permission"));
             return false;
         }
         allowedSubcommands.get(subcommand).execute(sender, args);

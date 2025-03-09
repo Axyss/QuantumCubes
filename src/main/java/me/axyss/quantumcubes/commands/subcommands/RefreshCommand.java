@@ -20,16 +20,18 @@ public class RefreshCommand implements SubCommand {
     public void execute(CommandSender sender, String[] args) {
         String refreshStartMessage = Language.getMessage("refresh-start");
         String refreshEndMessage = Language.getMessage("refresh-end");
+        String prefixedRefreshStartMessage = Language.getPrefixedMessage("refresh-start");
+        String prefixedRefreshEndMessage = Language.getPrefixedMessage("refresh-end");
 
         if (args.length > 1) {
-            sender.sendMessage(Language.getMessage("invalid_syntax"));
+            sender.sendMessage(Language.getMessage("invalid-syntax"));
             return;
         }
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            sender.sendMessage(refreshStartMessage);
+            sender.sendMessage(prefixedRefreshStartMessage);
             plugin.getLogger().info(refreshStartMessage.substring(2));
             headDB.refreshHeadData();
-            sender.sendMessage(refreshEndMessage);
+            sender.sendMessage(prefixedRefreshEndMessage);
             plugin.getLogger().info(refreshEndMessage.substring(2));
         });
     }
