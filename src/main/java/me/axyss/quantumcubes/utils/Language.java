@@ -9,11 +9,15 @@ import java.io.File;
 public class Language {
     private static YamlConfiguration langFile;
 
-    public static void loadFile(JavaPlugin plugin) {
+    public static void saveDefaultLang(JavaPlugin plugin ) {
         File langFile = new File(plugin.getDataFolder(), "lang.yml");
         if (!langFile.exists()) {
             plugin.saveResource("lang.yml", false);
         }
+    }
+
+    public static void loadFile(JavaPlugin plugin) {
+        File langFile = new File(plugin.getDataFolder(), "lang.yml");
         Language.langFile = YamlConfiguration.loadConfiguration(langFile);
     }
 

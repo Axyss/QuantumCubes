@@ -25,9 +25,15 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onLoad() {
+        // Resource creation
         saveDefaultConfig();
-        Language.loadFile(this);  // todo fix
+        Language.saveDefaultLang(this);
+        // Resource update
         updateYAMLResources("config.yml", "lang.yml");
+        // Resource load
+        reloadConfig();
+        Language.loadFile(this);
+
         QuantumCube.setPlugin(this);
         QuantumCube.setDefaultItemValues(
                 getConfig().getString("qc-default-name"),
@@ -75,6 +81,5 @@ public class Main extends JavaPlugin {
                 return;
             }
         }
-        reloadConfig();
     }
 }
