@@ -3,6 +3,7 @@ package me.axyss.quantumcubes.commands;
 import me.axyss.quantumcubes.commands.subcommands.HelpCommand;
 import me.axyss.quantumcubes.commands.subcommands.GiveCommand;
 import me.axyss.quantumcubes.commands.subcommands.RefreshCommand;
+import me.axyss.quantumcubes.commands.subcommands.ReloadCommand;
 import me.axyss.quantumcubes.data.HeadDatabase;
 import me.axyss.quantumcubes.utils.Language;
 import org.bukkit.command.Command;
@@ -22,6 +23,7 @@ public class QuantumCubesCommand implements CommandExecutor, TabCompleter {
     public QuantumCubesCommand(JavaPlugin plugin, HeadDatabase headDB) {
         allowedSubcommands.put("help", new HelpCommand());
         allowedSubcommands.put("give", new GiveCommand());
+        allowedSubcommands.put("reload", new ReloadCommand(plugin));
         allowedSubcommands.put("refresh", new RefreshCommand(plugin, headDB));
     }
 

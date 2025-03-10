@@ -10,5 +10,7 @@ messages:
     &9/qc help &7- Shows this help message.
     &9/qc give <player> [amount] &7- Gives a certain amount of cubes to a player.
     &9/qc refresh &7- Forces a manual refresh of the internal head database.
+    &9/qc reload &7- Reloads the plugin's configuration.
   refresh-start: "&aRefreshing head database... (this might take a bit)"
   refresh-end: "&aHead database refreshed!"
+  reload-success: "&aPlugin configuration reloaded!"

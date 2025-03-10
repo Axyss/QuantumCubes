@@ -8,7 +8,7 @@
 . It enhances the Minecraft experience by allowing players to easily obtain custom heads in-game.
 </p>
 
-❗**ProtocolLib and Minecraft versions 1.20/1.20.1 are required**
+❗**ProtocolLib and Minecraft versions 1.20-1.21.4 are required**
 
 ## How to use
 1. Go to <a href="https://minecraft-heads.com/">Minecraft Heads</a>
@@ -29,6 +29,7 @@
 - **/qc help** - Displays the list of plugin commands and their usages.
 - **/qc give** \<player\> [amount] - Gives a certain player the selected amount of cubes.
 - **/qc refresh** - Forces a manual refresh of the internal head database.
+- **/qc reload** - Reloads the plugin's configuration.
 
 ## Permissions
 | Permission node      | Description                               | Default setting |
@@ -36,6 +37,7 @@
 | quantumcubes.help    | Controls usage of the /qc help command    | OP              |
 | quantumcubes.give    | Controls usage of the /qc give command    | OP              |
 | quantumcubes.refresh | Controls usage of the /qc refresh command | OP              |
+| quantumcubes.reload  | Controls usage of the /qc reload command  | OP              |
 | quantumcubes.use     | Controls usage of the cubes themselves    | Everyone        |
 
 ## License

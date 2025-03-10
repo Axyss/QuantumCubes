@@ -9,7 +9,7 @@ import java.io.File;
 public class Language {
     private static YamlConfiguration langFile;
 
-    public static void loadLangFile(JavaPlugin plugin) {
+    public static void loadFile(JavaPlugin plugin) {
         File langFile = new File(plugin.getDataFolder(), "lang.yml");
         if (!langFile.exists()) {
             plugin.saveResource("lang.yml", false);

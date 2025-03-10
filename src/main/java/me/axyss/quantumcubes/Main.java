@@ -25,10 +25,9 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        // Required loading order: Config -> Resource update -> Language -> Others
         saveDefaultConfig();
+        Language.loadFile(this);  // todo fix
         updateYAMLResources("config.yml", "lang.yml");
-        Language.loadLangFile(this);
         QuantumCube.setPlugin(this);
         QuantumCube.setDefaultItemValues(
                 getConfig().getString("qc-default-name"),

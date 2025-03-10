@@ -8,8 +8,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class RefreshCommand implements SubCommand {
-    private JavaPlugin plugin;
-    private HeadDatabase headDB;
+    private final JavaPlugin plugin;
+    private final HeadDatabase headDB;
 
     public RefreshCommand(JavaPlugin plugin, HeadDatabase headDB) {
         this.plugin = plugin;
