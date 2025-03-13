@@ -17,6 +17,7 @@ import java.time.Instant;
 import java.util.Base64;
 
 public class HeadDatabase {
+    private final String textureBaseUrl = "http://textures.minecraft.net/texture/";
     private final Connection connection;
     private final Path dbPath;
 
@@ -71,14 +72,15 @@ public class HeadDatabase {
     private static String extractTextureLink(String base64Blob) {
         String decodedString = new String(Base64.getDecoder().decode(base64Blob));
         JsonObject parsedJson = (JsonObject) JsonParser.parseString(decodedString);
-        return parsedJson.getAsJsonObject("textures").getAsJsonObject("SKIN").get("url").getAsString();
+        String parsedUrl = parsedJson.getAsJsonObject("textures").getAsJsonObject("SKIN").get("url").getAsString();
+        return parsedUrl.substring(parsedUrl.lastIndexOf('/') + 1);
     }
 
     public URL getHeadTextureURL(String headId) {
         try (PreparedStatement selectStatement = connection.prepareStatement("SELECT texture FROM heads WHERE id = ?")) {
             selectStatement.setString(1, headId);
-            String textureUrl = selectStatement.executeQuery().getString("texture");
-            return new URL(textureUrl);
+            String textureResource = selectStatement.executeQuery().getString("texture");
+            return new URL(textureBaseUrl + textureResource);
         } catch (MalformedURLException e) {
             return null;
         } catch (SQLException e) {
