@@ -66,6 +66,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        // todo Handle potential problems with async tasks
         headDB.close();
     }
 
