@@ -1,9 +1,9 @@
 <img style="z-index: 10;" src="https://raw.githubusercontent.com/Axyss/QuantumCubes/refs/heads/master/.github/assets/icon.png" alt="quantum_cubes_logo" align="right" width="150"></img>
-# Quantum Cubes
+# QuantumCubes
 ## What's this?
 
 <p style="max-width: 90ch;">
-    Quantum Cubes is a Spigot plugin that provides users with an intuitive method for accessing the vast database of 
+    QuantumCubes is a Spigot plugin that provides users with an intuitive method for accessing the vast database of 
     <a href="https://minecraft-heads.com/">Minecraft Heads</a>
 . It enhances the Minecraft experience by allowing players to easily obtain custom heads in-game.
 </p>
