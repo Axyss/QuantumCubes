@@ -5,6 +5,7 @@ messages:
   no-permission: "&cYou do not have enough permissions to use this command!"
 
   # Commands
+  give-success: "&9x{amount} &7cubes given to &9{player}"
   refresh-start: "&aRefreshing head database... (this might take a bit)"
   refresh-end: "&aHead database refreshed!"
   reload-success: "&aPlugin configuration reloaded!"

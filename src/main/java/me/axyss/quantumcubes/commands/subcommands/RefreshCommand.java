@@ -18,8 +18,6 @@ public class RefreshCommand implements SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        String refreshStartMessage = Language.getMessage("refresh-start");
-        String refreshEndMessage = Language.getMessage("refresh-end");
         String prefixedRefreshStartMessage = Language.getPrefixedMessage("refresh-start");
         String prefixedRefreshEndMessage = Language.getPrefixedMessage("refresh-end");
 
@@ -29,10 +27,8 @@ public class RefreshCommand implements SubCommand {
         }
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             sender.sendMessage(prefixedRefreshStartMessage);
-            plugin.getLogger().info(refreshStartMessage.substring(2));
             headDB.refreshHeadData();
             sender.sendMessage(prefixedRefreshEndMessage);
-            plugin.getLogger().info(refreshEndMessage.substring(2));
         });
     }
 }

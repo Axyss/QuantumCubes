@@ -31,6 +31,7 @@ public class GiveCommand implements SubCommand {
             }
         }
         giveToPlayer.getInventory().addItem(QuantumCube.getItem(amount));
+        sender.sendMessage(Language.getPrefixedMessage("give-success").replace("{player}", giveToPlayer.getDisplayName()).replace("{amount}", String.valueOf(amount)));
         giveToPlayer.playSound(giveToPlayer, Sound.ENTITY_ITEM_PICKUP, 0.6f, 1.0f);
     }
 

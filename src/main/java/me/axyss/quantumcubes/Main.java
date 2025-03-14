@@ -53,7 +53,11 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new QuantumCubeListeners(this, protocolManager, headDB), this);
         // Scheduled task for database refreshing
         Bukkit.getScheduler().runTaskTimerAsynchronously(
-                this, () -> headDB.refreshHeadData(),
+                this, task -> {
+                    getServer().getConsoleSender().sendMessage(Language.getPrefixedMessage("refresh-start"));
+                    headDB.refreshHeadData();
+                    getServer().getConsoleSender().sendMessage(Language.getPrefixedMessage("refresh-end"));
+                },
                 Math.max(0L, dbRefreshInterval - headDB.getSecondsSinceLastRefresh()) * 20L, dbRefreshInterval * 20L);
 
         // Telemetry
