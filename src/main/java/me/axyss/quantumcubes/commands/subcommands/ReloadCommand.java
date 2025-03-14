@@ -1,5 +1,6 @@
 package me.axyss.quantumcubes.commands.subcommands;
 
+import static me.axyss.quantumcubes.Main.setDefaultItemValues;
 import me.axyss.quantumcubes.commands.SubCommand;
 import me.axyss.quantumcubes.utils.Language;
 import org.bukkit.command.CommandSender;
@@ -18,6 +19,7 @@ public class ReloadCommand implements SubCommand {
             return;
         }
         plugin.reloadConfig();
+        setDefaultItemValues(plugin);
         sender.sendMessage(Language.getPrefixedMessage("reload-success"));
     }
 }

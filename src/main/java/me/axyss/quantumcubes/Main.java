@@ -35,11 +35,7 @@ public class Main extends JavaPlugin {
         Language.loadFile(this);
 
         QuantumCube.setPlugin(this);
-        QuantumCube.setDefaultItemValues(
-                getConfig().getString("qc-default-name"),
-                getConfig().getStringList("qc-default-lore"),
-                getConfig().getString("qc-default-texture")
-        );
+        setDefaultItemValues(this);
         protocolManager = ProtocolLibrary.getProtocolManager();
         headDB = new HeadDatabase(Paths.get(getDataFolder().getPath(), "heads.db"));
         dbRefreshInterval = getConfig().getLong("db-refresh-interval");
@@ -67,6 +63,14 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         headDB.close();
+    }
+
+    public static void setDefaultItemValues(JavaPlugin plugin) {
+        QuantumCube.setDefaultItemValues(
+                plugin.getConfig().getString("qc-default-name"),
+                plugin.getConfig().getStringList("qc-default-lore"),
+                plugin.getConfig().getString("qc-default-texture")
+        );
     }
 
     private void updateYAMLResources(String... resourceNames) {
