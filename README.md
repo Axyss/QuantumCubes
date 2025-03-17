@@ -5,7 +5,7 @@
 <p style="max-width: 90ch;">
     QuantumCubes is a Spigot plugin that provides users with an intuitive method for accessing the vast database of 
     <a href="https://minecraft-heads.com/">Minecraft Heads</a>
-. It enhances the Minecraft experience by allowing players to easily obtain custom heads in-game.
+. It enhances the Minecraft experience by allowing players to obtain Quantum Cubes, special heads able to transform once into any of the more than 100K heads present in the website.
 </p>
 
 ❗**ProtocolLib and Minecraft versions 1.20-1.21.4 are required**
